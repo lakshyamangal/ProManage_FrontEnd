@@ -1,0 +1,9 @@
+.card{
+    background-color: #fff;
+    padding: 1vw;
+    margin-top:10px;
+    border-radius:10px
+}
+.checkList{
+    display: flex;
+}
