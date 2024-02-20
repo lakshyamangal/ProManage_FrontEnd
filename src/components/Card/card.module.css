@@ -1,9 +1,52 @@
-.card{
-    background-color: #fff;
-    padding: 1vw;
-    margin-top:10px;
-    border-radius:10px
+.card {
+  background-color: #fff;
+  padding: 1vw;
+  margin-top: 10px;
+  border-radius: 10px;
 }
-.checkList{
-    display: flex;
+.checkList {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  align-items: center;
+}
+.checkbox {
+  padding: 0.5rem;
+}
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+}
+.cardheader {
+  display: flex;
+}
+.bullet {
+  background-color: green;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.date {
+  background-color: #cf3636;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  border-radius: 8px;
+}
+.switchSection {
+  display: flex;
+}
+.sectionBtn {
+  background: #eeecec;
+  padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+  border-radius: 8px;
+  margin-right: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
 }

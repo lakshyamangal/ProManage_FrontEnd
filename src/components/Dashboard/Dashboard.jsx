@@ -1,34 +1,32 @@
-import React,{useState,useEffect} from 'react'
-import styles from './Dashboard.module.css'
-import Navpanel from'../Navpanel/navpanel'
-import Section from '../Section/section'
-import Card from '../Card/card'
+import React, { useState, useEffect } from "react";
+import { getAllCards } from "../../apis/card";
+import styles from "./Dashboard.module.css";
+import Navpanel from "../Navpanel/navpanel";
+import Section from "../Section/section";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Dashboard() {
   const [data, setData] = useState(null);
-  const [keys,setkeys] = useState([]);
-    useEffect(() => {
-        fetch('http://localhost:4000/api/v1/card/getAllCards/1707501391000/1708365397000', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NWQzOGZhNDZlZDdjMzAwOWE0YmIwZmYiLCJpYXQiOjE3MDgzNjM2ODR9.gLps6pi-YY__wRtyDmkNTg7xVqSJisQz-i3g9rkkmaY'
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log("fetched data ",data.data);
-            setkeys(Object.keys(data.data))
-            setData(data.data);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    },[]);
+  const [keys, setkeys] = useState([]);
+  console.log(keys);
+  useEffect(() => {
+    fetchAllData();
+  }, []);
+  const fetchAllData = async () => {
+    try {
+      const data = await getAllCards(1608460307000, 1708460307000);
+      setData(data);
+      setkeys(Object.keys(data));
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
   return (
     <div className={styles.home}>
-      <div className="navbar"><Navpanel /></div>
+      <div className="navbar">
+        <Navpanel />
+      </div>
       <div className="board">
         <div className={styles.dashboard}>
           <div className={styles.header}>
@@ -43,15 +41,18 @@ function Dashboard() {
           </div>
         </div>
         <div className={styles.scrollContainer}>
-        <div className={styles.container}>
-          {keys && data && keys.map((key)=>{
-            return(<Section item={key} data={data}/>)
-          })}
+          <div className={styles.container}>
+            {keys &&
+              data &&
+              keys.map((key) => {
+                return <Section item={key} data={data} />;
+              })}
+          </div>
         </div>
       </div>
-        </div>
+      <ToastContainer />
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;

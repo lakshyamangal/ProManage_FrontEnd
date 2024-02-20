@@ -1,18 +1,26 @@
 .container {
-  width: 40vw;
+  width: 50vw;
   padding: 10vw;
   box-sizing: border-box;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: white;
+  background-color: white;
 }
+
 .h1 {
-  font-size: 2rem;
+  font-size: 32px;
   margin-bottom: 6vh;
   font-weight: 900;
 }
+
+.h2 {
+  font-size: 16px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
 .input {
   padding: 8px;
   border-radius: 6px;

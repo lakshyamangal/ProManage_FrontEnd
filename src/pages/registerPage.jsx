@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
+import Register from "../components/regsister/register";
+import loginImage from "../assets/images/login.png";
 
-function registerPage() {
+function RegisterPage() {
   return (
-    <div>
-      hello i am registerpage
+    <div style={{ display: "flex", background: "#17a2b8" }}>
+      <img
+        style={{ maxHeight: "100vh", width: "60vw" }}
+        src={loginImage}
+        alt="Login cover"
+      />
+      <Register />
     </div>
-  )
+  );
 }
 
-export default registerPage
+export default RegisterPage;
