@@ -1,0 +1,17 @@
+.dashboard {
+  width: 83vw;
+  padding: 1vw;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container {
+  display: flex;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.scrollContainer {
+  width: 85vw;
+}

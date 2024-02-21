@@ -1,13 +1,13 @@
-.section{
-    width: 25vw;
-    padding: 1vw;
-    background-color: #ccc;
-    margin-left:1vw;
-    min-width: 25vw;
+.section {
+  width: 25vw;
+  padding: 1vw;
+  background: #eef2f5;
+  margin-left: 1vw;
+  min-width: 25vw;
 }
-.cards{
-    margin-top: 1vw;
+.cards {
+  margin-top: 1vw;
 }
-.sectionTitle{
-    font-weight: 200;
+.sectionTitle {
+  font-weight: 200;
 }
