@@ -5,30 +5,44 @@ import Board from "../Board/board";
 import Settings from "../Settings/settings";
 import Analytics from "../Analytics/analytics";
 import LogOut from "../Logout/logOut";
+import Delete from "../Delete/delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Dashboard() {
   const [page, setPage] = useState("Board");
+
   const [logOut, setLogOut] = useState(false);
+  const [deleteCard, setDeleteCard] = useState(false);
+
   const changelogOut = (status) => {
     setLogOut(status);
+  };
+  const changeDelete = (answer) => {
+    setDeleteCard(answer);
   };
   const changeBoard = (page) => {
     console.log(page);
     setPage(page);
   };
+  const renderPage = () => {
+    switch (page) {
+      case "Board":
+        return <Board />;
+      case "Analytics":
+        return <Analytics />;
+      case "Settings":
+        return <Settings />;
+      default:
+        return null;
+    }
+  };
   return (
     <div className={styles.home}>
       <Navpanel changeBoard={changeBoard} changelogOut={changelogOut} />
-      {page == "Board" ? (
-        <Board />
-      ) : page == "Analytics" ? (
-        <Analytics />
-      ) : (
-        <Settings />
-      )}
+      {renderPage()}
       {logOut && <LogOut changelogOut={changelogOut} />}
+      {deleteCard && <Delete changeDelete={changeDelete} />}
     </div>
   );
 }
