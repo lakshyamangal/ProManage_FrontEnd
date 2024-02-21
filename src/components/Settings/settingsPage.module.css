@@ -1,0 +1,18 @@
+.settingsPage {
+  width: 81vw;
+  padding: 4vw;
+}
+.settingsPage h2 {
+  margin-bottom: 1rem;
+}
+.input {
+  width: 20rem;
+  display: flex;
+  border-style: solid;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  border-radius: 10px;
+}
+.input input {
+  border-style: none;
+}

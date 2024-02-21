@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./analytics.module.css";
 import { getAllAnalytics } from "../../apis/analytics";
+import ellipse from "../../assets/icons/ellipse.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Analytics() {
@@ -25,42 +26,58 @@ function Analytics() {
   return (
     <div className={styles.analytics}>
       <h2 className={styles.title}>Analytics</h2>
-      {analytics && (
+      {analytics && analytics.status && (
         <div className={styles.outerContainer}>
           <div className={styles.container}>
             <div>
-              <p>Backlog Tasks</p>
-              <p>{analytics?.status?.backlog}</p>
+              <p>
+                <img src={ellipse} /> Backlog Tasks
+              </p>
+              <p className={styles.numbers}>{analytics.status.backlog}</p>
             </div>
             <div>
-              <p>To-do Tasks</p>
-              <p>{analytics?.status?.toDo}</p>
+              <p>
+                <img src={ellipse} /> To-do Tasks
+              </p>
+              <p className={styles.numbers}>{analytics?.status?.toDo}</p>
             </div>
             <div>
-              <p>In-Progress Tasks</p>
-              <p>{analytics?.status?.inProgress}</p>
+              <p>
+                <img src={ellipse} /> In-Progress Tasks
+              </p>
+              <p className={styles.numbers}>{analytics?.status?.inProgress}</p>
             </div>
             <div>
-              <p>Completed Tasks</p>
-              <p>{analytics?.status?.done}</p>
+              <p>
+                <img src={ellipse} /> Completed Tasks
+              </p>
+              <p className={styles.numbers}>{analytics?.status?.done}</p>
             </div>
           </div>
           <div className={styles.container}>
             <div>
-              <p>Low Priority</p>
-              <p>{analytics?.priority?.low}</p>
+              <p>
+                <img src={ellipse} /> Low Priority
+              </p>
+              <p className={styles.numbers}>{analytics?.priority?.low}</p>
             </div>
             <div>
-              <p>Moderate Priority</p>
-              <p>{analytics?.priority?.moderate}</p>
+              <p>
+                <img src={ellipse} /> Moderate Priority
+              </p>
+              <p className={styles.numbers}>{analytics?.priority?.moderate}</p>
             </div>
             <div>
-              <p>High Priority</p>
-              <p>{analytics?.priority?.high}</p>
+              <p>
+                <img src={ellipse} /> High Priority
+              </p>
+              <p className={styles.numbers}>{analytics?.priority?.high}</p>
             </div>
             <div>
-              <p>Due Date Tasks</p>
-              <p>{analytics?.dueDate}</p>
+              <p>
+                <img src={ellipse} /> Due Date Tasks
+              </p>
+              <p className={styles.numbers}>{analytics?.dueDate}</p>
             </div>
           </div>
         </div>

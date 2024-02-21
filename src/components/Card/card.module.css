@@ -6,13 +6,8 @@
 }
 .checkList {
   display: flex;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin: 0.5rem 0;
+  justify-content: space-between;
   align-items: center;
-}
-.checkbox {
-  padding: 0.5rem;
 }
 .cardFooter {
   display: flex;

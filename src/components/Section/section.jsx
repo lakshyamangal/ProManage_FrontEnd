@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./section.module.css";
 import Card from "../Card/card";
-function Section({ item, data }) {
+function Section({ item, data, fetchAllData }) {
   const [cardData, setCardData] = useState();
   useEffect(() => {
     console.log("data ", data[item], item);
@@ -15,7 +15,7 @@ function Section({ item, data }) {
         {cardData &&
           item &&
           cardData.map((card) => {
-            return <Card data={card} keys={item} />;
+            return <Card data={card} key={item} fetchAllData={fetchAllData} />;
           })}
       </div>
     </div>

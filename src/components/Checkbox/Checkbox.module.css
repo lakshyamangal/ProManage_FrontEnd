@@ -1,0 +1,10 @@
+.checkbox {
+  padding: 0.5rem;
+}
+.checkList {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 0.5rem 0;
+  align-items: center;
+}

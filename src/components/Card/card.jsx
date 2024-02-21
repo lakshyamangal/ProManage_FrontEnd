@@ -1,16 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./card.module.css";
-import { editCheckList } from "../../apis/card";
-
-const Card = ({ data, item }) => {
-  const handleCheckboxChange = (event, itemId) => {
-    console.log("checklist data ", event, itemId);
-    // editCheckList();
+import upArrow from "../../assets/icons/up.png";
+import downArrow from "../../assets/icons/down.png";
+import { statusChange } from "../../apis/card";
+import Checkbox from "../Checkbox/Checkbox";
+const Card = ({ data, key, fetchAllData }) => {
+  const [cardData, setCardData] = useState(data);
+  const [collapsed, setCollapsed] = useState(true);
+  const handleStatusChange = (key, cardId) => {
+    statusChange(cardId, key);
+    fetchAllData();
+  };
+  const handleCollapseBtn = () => {
+    setCollapsed(!collapsed);
+    fetchAllData();
   };
 
   useEffect(() => {
     console.log("keys ", data);
-  }, []);
+  }, [cardData]);
   const keys = ["toDo", "backlog", "inProgress", "done"];
 
   return (
@@ -21,30 +29,40 @@ const Card = ({ data, item }) => {
       </div>
       <div className="cardTitle">{data.title}</div>
       <div className="checkLists">
-        <div className="checkTitle">Checklist (1/3)</div>
-        {data &&
+        <div className={styles.checkList}>
+          <div className="checkHead">CheckList (1/3)</div>
+          <div className="collapseIcon" onClick={handleCollapseBtn}>
+            <img src={collapsed ? downArrow : upArrow} alt="logo" />
+          </div>
+        </div>
+        {!collapsed &&
+          data &&
+          data.checkList &&
           data.checkList.map((items) => {
+            console.log("data ", data._id);
             return (
-              <div className={styles.checkList}>
-                <div className={styles.checkbox}>
-                  <input
-                    type="checkbox"
-                    id={items._id}
-                    name={items.title}
-                    checked={items.isCompleted}
-                    onChange={(e) => handleCheckboxChange(e, data._id)}
-                  />
-                </div>
-                <div className="checkTitle">{items.title}</div>
-              </div>
+              <Checkbox
+                items={items}
+                CardId={data._id}
+                fetchAllData={fetchAllData}
+              />
             );
           })}
         <div className={styles.cardFooter}>
           <div className={styles.date}>Feb 10th</div>
           <div className={styles.switchSection}>
-            {keys.map((key) => (
-              <div className={styles.sectionBtn}>{key}</div>
-            ))}
+            {keys.map((key) => {
+              if (!data.status.includes(key)) {
+                return (
+                  <div
+                    className={styles.sectionBtn}
+                    onClick={() => handleStatusChange(key, data._id)}
+                  >
+                    {key}
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
       </div>

@@ -16,8 +16,9 @@ function Board() {
     fetchAllData();
   }, []);
   const fetchAllData = async () => {
+    console.log("dfsdgfhh");
     try {
-      const data = await getAllCards(1608460307000, 1708460307000);
+      const data = await getAllCards("week");
       setData(data);
       setkeys(Object.keys(data));
     } catch (error) {
@@ -43,7 +44,9 @@ function Board() {
           {keys &&
             data &&
             keys.map((key) => {
-              return <Section item={key} data={data} />;
+              return (
+                <Section item={key} data={data} fetchAllData={fetchAllData} />
+              );
             })}
         </div>
       </div>

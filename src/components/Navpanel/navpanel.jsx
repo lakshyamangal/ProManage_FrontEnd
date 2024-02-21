@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Navpanel.module.css";
 import ProMangage from "../../assets/icons/ProManage.png";
 import board from "../../assets/icons/board.png";
 import settings from "../../assets/icons/settings.png";
 import analytics from "../../assets/icons/analytics.png";
 import Logout from "../../assets/icons/Logout.png";
+import LogOut from "../Logout/logOut";
 
-function Navpanel({ changeBoard, changelogOut }) {
+function Navpanel({ changeBoard }) {
+  const [logOut, setLogOut] = useState(false);
+  const changelogOut = (status) => {
+    setLogOut(status);
+  };
   return (
     <div className={styles.navBar}>
       <div className={styles.logoMain}>
@@ -34,6 +39,7 @@ function Navpanel({ changeBoard, changelogOut }) {
         <img src={Logout} />
         <div className={styles.logOutTitle}>Log out</div>
       </div>
+      {logOut && <LogOut changelogOut={changelogOut} />}
     </div>
   );
 }
