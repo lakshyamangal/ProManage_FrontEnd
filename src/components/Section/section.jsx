@@ -1,23 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useData } from "../../Context/dataContext";
 import styles from "./section.module.css";
 import Card from "../Card/card";
-function Section({ item, data, fetchAllData }) {
-  const [cardData, setCardData] = useState();
+function Section({ item }) {
+  const { data } = useData();
+  const [secData, setSecData] = useState();
   useEffect(() => {
     console.log("data ", data, item);
-    setCardData(data);
-  }, [data]);
+    setSecData(data[item]);
+  }, [data[item]]);
 
   return (
     <div className={styles.section}>
       <div className={styles.sectionTitle}>{item}</div>
       <div className={styles.cards}>
-        {cardData &&
+        {secData &&
           item &&
-          cardData.map((card) => {
-            return (
-              <Card key={card._id} data={card} fetchAllData={fetchAllData} />
-            );
+          secData.map((card) => {
+            return <Card key={card._id} cardData={card} />;
           })}
       </div>
     </div>

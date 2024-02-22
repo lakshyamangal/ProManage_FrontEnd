@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAllCards } from "../../apis/card";
 import DurationDropdown from "../DurationDropdown/DurationDropdown";
 import { useDuration } from "../../Context/DurationContext";
+import { useData } from "../../Context/dataContext";
 import styles from "./board.module.css";
 import Section from "../Section/section";
 import moment from "moment";
@@ -12,25 +13,11 @@ function Board() {
   const name = localStorage.getItem("userName");
   const currentDate = moment();
   const formattedDate = currentDate.format("Do MMM, YYYY");
-  const [data, setData] = useState(null);
-  const [keys, setkeys] = useState([]);
   const { duration, updateDuration } = useDuration();
-
+  const { data, keys, fetchAllData } = useData();
   useEffect(() => {
-    fetchAllData();
+    fetchAllData(duration);
   }, [duration]);
-
-  const fetchAllData = async () => {
-    console.log("dfsdgfhh");
-    try {
-      const data = await getAllCards(duration);
-      setData(data);
-      setkeys(Object.keys(data));
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-
   return (
     <div className={styles.board}>
       <div className={styles.dashboard}>
@@ -54,8 +41,8 @@ function Board() {
                 <Section
                   key={k}
                   item={k}
-                  data={data[k]}
-                  fetchAllData={fetchAllData}
+                  // data={data[k]}
+                  // fetchAllData={fetchAllData}
                 />
               );
             })}

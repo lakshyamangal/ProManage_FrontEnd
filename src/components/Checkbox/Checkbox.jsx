@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import styles from "./Checkbox.module.css";
 import { editCheckList } from "../../apis/card";
 import { toast } from "react-toastify";
-const Checkbox = (items, CardId, fetchAllData) => {
-  const [isChecked, setIsChecked] = useState(items.items.isCompleted);
-  useEffect(() => {
-    console.log("values ", items, CardId);
-  }, []);
+// import { useData } from "../../Context/dataContext";
+// import { useDuration } from "../../Context/DurationContext";
+const Checkbox = ({ item, CardId }) => {
+  // const { fetchAllData } = useData();
+  // const { duration } = useDuration();
+  const [isChecked, setIsChecked] = useState(item.isCompleted);
   const handleCheckboxChange = async (event, itemId, CardId) => {
-    const value = isChecked;
-    items.fetchAllData();
+    const prevValue = isChecked;
     try {
-      setIsChecked(!isChecked);
+      setIsChecked(event.target.checked);
       await editCheckList(CardId, itemId, event.target.checked);
     } catch (error) {
-      setIsChecked(value);
+      setIsChecked(prevValue);
       toast.error(error.message);
     }
   };
@@ -23,16 +23,14 @@ const Checkbox = (items, CardId, fetchAllData) => {
       <div className={styles.checkbox}>
         <input
           type="checkbox"
-          id={items._id}
-          name={items.title}
+          id={item._id}
+          name={item.title}
           checked={isChecked}
           value={isChecked}
-          onChange={(e) =>
-            handleCheckboxChange(e, items.items._id, items.CardId)
-          }
+          onChange={(e) => handleCheckboxChange(e, item._id, CardId)}
         />
       </div>
-      <div className="checkTitle">{items.items.title}</div>
+      <div className="checkTitle">{item.title}</div>
     </div>
   );
 };
