@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 
 // Create a new context
-const FetchDataContext = createContext();
+const DeleteUserContext = createContext();
 
 // Create a custom hook to access the context
 export const useDeleteUser = () => useContext(DeleteUserContext);

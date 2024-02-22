@@ -4,9 +4,9 @@ import Card from "../Card/card";
 function Section({ item, data, fetchAllData }) {
   const [cardData, setCardData] = useState();
   useEffect(() => {
-    console.log("data ", data[item], item);
-    setCardData(data[item]);
-  }, []);
+    console.log("data ", data, item);
+    setCardData(data);
+  }, [data]);
 
   return (
     <div className={styles.section}>
@@ -15,7 +15,9 @@ function Section({ item, data, fetchAllData }) {
         {cardData &&
           item &&
           cardData.map((card) => {
-            return <Card data={card} key={item} fetchAllData={fetchAllData} />;
+            return (
+              <Card key={card._id} data={card} fetchAllData={fetchAllData} />
+            );
           })}
       </div>
     </div>

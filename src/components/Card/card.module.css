@@ -23,7 +23,6 @@
   border-radius: 50%;
 }
 .date {
-  background-color: #cf3636;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   font-size: 12px;
   font-weight: 500;
@@ -32,6 +31,7 @@
   color: #fff;
   border-radius: 8px;
 }
+
 .switchSection {
   display: flex;
 }
@@ -44,4 +44,5 @@
   font-weight: 500;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }

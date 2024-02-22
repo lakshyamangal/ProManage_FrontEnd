@@ -24,3 +24,17 @@ export const loginUser = async ({ email, password }) => {
     return Promise.reject(error);
   }
 };
+export const updateUser = async ({ name, oldPassword, newPassword }) => {
+  try {
+    const reqUrl = `${backendUrl}/auth/updateUser`;
+    const reqPayload = { name, oldPassword, newPassword };
+    console.log(reqPayload);
+    const response = await axios.put(reqUrl, reqPayload);
+
+    if (!response.data.success) throw new Error(response.data.data);
+
+    return response.data.data;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

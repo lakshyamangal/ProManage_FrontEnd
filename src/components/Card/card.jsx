@@ -4,21 +4,35 @@ import upArrow from "../../assets/icons/up.png";
 import downArrow from "../../assets/icons/down.png";
 import { statusChange } from "../../apis/card";
 import Checkbox from "../Checkbox/Checkbox";
-const Card = ({ data, key, fetchAllData }) => {
-  const [cardData, setCardData] = useState(data);
+import moment from "moment";
+
+const Card = ({ data, fetchAllData }) => {
   const [collapsed, setCollapsed] = useState(true);
-  const handleStatusChange = (key, cardId) => {
-    statusChange(cardId, key);
-    fetchAllData();
+  const [displayDueDate, setDisplayDueDate] = useState("");
+  const [haveDueDate, setHaveDueDate] = useState(true);
+  const [backgroundColor, setBackgroundColor] = useState("#cf3636");
+
+  const handleStatusChange = async (key, cardId) => {
+    await statusChange(cardId, key);
+    await fetchAllData();
   };
   const handleCollapseBtn = () => {
     setCollapsed(!collapsed);
-    fetchAllData();
+    //fetchAllData();
   };
 
   useEffect(() => {
-    console.log("keys ", data);
-  }, [cardData]);
+    data.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
+    const dueDate = moment(data.dueDate);
+    const currentDateMoment = moment();
+    const isAfter = currentDateMoment.isAfter(dueDate);
+
+    const color =
+      data.status == "done" ? "#63c05b" : isAfter ? "#cf3636" : "#5a5a5a";
+    setBackgroundColor(color);
+    setDisplayDueDate(dueDate.format("MMM DD"));
+    console.log(isAfter);
+  }, [data]);
   const keys = ["toDo", "backlog", "inProgress", "done"];
 
   return (
@@ -42,6 +56,7 @@ const Card = ({ data, key, fetchAllData }) => {
             console.log("data ", data._id);
             return (
               <Checkbox
+                key={items._id}
                 items={items}
                 CardId={data._id}
                 fetchAllData={fetchAllData}
@@ -49,12 +64,22 @@ const Card = ({ data, key, fetchAllData }) => {
             );
           })}
         <div className={styles.cardFooter}>
-          <div className={styles.date}>Feb 10th</div>
+          <div>
+            {haveDueDate && (
+              <div
+                style={{ backgroundColor: backgroundColor }}
+                className={styles.date}
+              >
+                {displayDueDate}
+              </div>
+            )}
+          </div>
           <div className={styles.switchSection}>
             {keys.map((key) => {
               if (!data.status.includes(key)) {
                 return (
                   <div
+                    key={key}
                     className={styles.sectionBtn}
                     onClick={() => handleStatusChange(key, data._id)}
                   >
