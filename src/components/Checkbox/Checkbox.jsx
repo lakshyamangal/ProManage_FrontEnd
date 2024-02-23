@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import styles from "./Checkbox.module.css";
 import { editCheckList } from "../../apis/card";
 import { toast } from "react-toastify";
-// import { useData } from "../../Context/dataContext";
+import { useData } from "../../Context/dataContext";
 // import { useDuration } from "../../Context/DurationContext";
 const Checkbox = ({ item, CardId }) => {
-  // const { fetchAllData } = useData();
+  const { updateCheckListCountToggle } = useData();
   // const { duration } = useDuration();
   const [isChecked, setIsChecked] = useState(item.isCompleted);
   const handleCheckboxChange = async (event, itemId, CardId) => {
@@ -13,6 +13,7 @@ const Checkbox = ({ item, CardId }) => {
     try {
       setIsChecked(event.target.checked);
       await editCheckList(CardId, itemId, event.target.checked);
+      updateCheckListCountToggle();
     } catch (error) {
       setIsChecked(prevValue);
       toast.error(error.message);

@@ -1,13 +1,18 @@
+/* Delete component CSS */
 .delete {
-  width: 100vw;
-  height: 100vh;
-  z-index: 2;
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  position: fixed; /* Fixed position to stay relative to the viewport */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  z-index: 1000; /* Higher z-index to ensure it's on top of other content */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+/* Box container CSS */
 .box {
   background: white;
   height: 12rem;
@@ -15,9 +20,8 @@
   border-radius: 1rem;
   padding: 1rem;
 }
-.box:hover {
-  cursor: pointer;
-}
+
+/* Message CSS */
 .message {
   padding: 1rem;
   text-align: center;
@@ -25,6 +29,8 @@
   font-family: Noto Sans;
   font-size: 0.8rem;
 }
+
+/* Yes button CSS */
 .yes {
   background: #17a2b8;
   color: white;
@@ -35,9 +41,12 @@
   font-family: poppins;
   font-weight: 600;
 }
+
 .yes:hover {
   background: #118a9d;
 }
+
+/* Cancel button CSS */
 .cancel {
   border-color: #cf3636;
   border-style: solid;
@@ -51,6 +60,7 @@
   font-weight: 600;
   background-color: white;
 }
+
 .cancel:hover {
   background: #ebebeb;
 }

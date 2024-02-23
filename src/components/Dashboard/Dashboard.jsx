@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import styles from "./Dashboard.module.css";
 import Navpanel from "../Navpanel/navpanel";
 import Board from "../Board/board";
+import { useData } from "../../Context/dataContext";
 import SettingsPage from "../Settings/settings";
 import Analytics from "../Analytics/analytics";
 import LogOut from "../Logout/logOut";
 import Delete from "../Delete/delete";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Create from "../createCard/createCard";
 
 function Dashboard() {
   const [page, setPage] = useState("Board");
-  const [deleteCard, setDeleteCard] = useState(false);
-
+  //const [deleteCard, setDeleteCard] = useState(true);
+  const { showCreate } = useData();
   // const changelogOut = (status) => {
   //   setLogOut(status);
   // };
-  const changeDelete = (answer) => {
-    setDeleteCard(answer);
-  };
+
   const changeBoard = (page) => {
     console.log(page);
     setPage(page);
@@ -40,7 +40,7 @@ function Dashboard() {
       <Navpanel changeBoard={changeBoard} />
       {renderPage()}
       {/* {logOut && <LogOut changelogOut={changelogOut} />} */}
-      {deleteCard && <Delete changeDelete={changeDelete} />}
+      {showCreate && <Create />}
     </div>
   );
 }

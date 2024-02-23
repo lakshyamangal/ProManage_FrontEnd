@@ -1,0 +1,25 @@
+.create {
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.box {
+  background: white;
+  height: 25rem;
+  width: 25rem;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+.box:hover {
+  cursor: pointer;
+}
+.priority {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

@@ -1,28 +1,22 @@
 import React, { createContext, useState, useContext } from "react";
-
-// Create a new context
-const DeleteUserContext = createContext();
-
-// Create a custom hook to access the context
-export const useDeleteUser = () => useContext(DeleteUserContext);
-
-// Create a provider component
-export const DeleteUserProvider = ({ children }) => {
-  const [userToDelete, setUserToDelete] = useState(null);
-
-  const deleteUser = (userId) => {
-    setUserToDelete(userId);
+import { deleteCard } from "../apis/card";
+const DeleteCardContext = createContext();
+export const useDeleteCard = () => useContext(DeleteCardContext);
+export const DeleteCardProvider = ({ children }) => {
+  const [cardId, setCardId] = useState(null);
+  const updateCardId = (cardId) => {
+    setCardId(cardId);
   };
-
-  const cancelDelete = () => {
-    setUserToDelete(null);
+  const [showDelete, setShowDelete] = useState(false);
+  const updateShowDelete = (status) => {
+    setShowDelete(status);
   };
 
   return (
-    <DeleteUserContext.Provider
-      value={{ userToDelete, deleteUser, cancelDelete }}
+    <DeleteCardContext.Provider
+      value={{ cardId, updateCardId, showDelete, updateShowDelete }}
     >
       {children}
-    </DeleteUserContext.Provider>
+    </DeleteCardContext.Provider>
   );
 };

@@ -3,6 +3,7 @@
   padding: 1vw;
   margin-top: 10px;
   border-radius: 10px;
+  position: relative;
 }
 .checkList {
   display: flex;
@@ -15,12 +16,27 @@
 }
 .cardheader {
   display: flex;
+  justify-content: space-between;
 }
 .bullet {
   background-color: green;
   width: 10px;
   height: 10px;
   border-radius: 50%;
+  margin-right: 0.2rem;
+}
+
+.dots {
+  font-weight: 700;
+  font-size: large;
+  letter-spacing: 0.22cap;
+}
+
+.priority {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 .date {
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
@@ -45,4 +61,42 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dots {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  background-color: #000;
+  border-radius: 50%;
+  margin: 3px 0;
+}
+
+.dropdownContent {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #ddd;
 }

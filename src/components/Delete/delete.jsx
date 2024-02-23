@@ -2,25 +2,29 @@ import React from "react";
 import styles from "./delete.module.css";
 import { useNavigate } from "react-router-dom";
 import { deleteCard } from "../../apis/card";
+import { useDeleteCard } from "../../Context/DeleteCardContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Delete({ changeDelete }) {
-  const navigate = useNavigate();
-  const cardId = "65d30923c0caceeab2412084";
+function Delete({ cardData, closeDeleteModal }) {
+  console.log("card data is --------__>", cardData);
   const deleteCardFunc = async () => {
     try {
-      const response = await deleteCard(cardId);
-      changeDelete(false);
+      const response = await deleteCard(cardData._id);
       toast.success(response, {
         autoClose: 1000,
       });
+      closeDeleteModal();
     } catch (error) {
-      changeDelete(false);
+      closeDeleteModal();
       toast.error(error.message, {
         autoClose: 1000,
       });
     }
+  };
+
+  const test = () => {
+    console.log("delete button clicked --------->");
   };
 
   return (
@@ -30,7 +34,7 @@ function Delete({ changeDelete }) {
         <p className={styles.yes} onClick={deleteCardFunc}>
           Yes, Delete
         </p>
-        <p className={styles.cancel} onClick={() => changeDelete(false)}>
+        <p className={styles.cancel} onClick={() => closeDeleteModal()}>
           Cancel
         </p>
       </div>

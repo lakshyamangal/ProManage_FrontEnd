@@ -1,30 +1,63 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { useDuration } from "../../Context/DurationContext";
+import { useDeleteCard } from "../../Context/DeleteCardContext";
 import { useData } from "../../Context/dataContext";
 import styles from "./card.module.css";
 import upArrow from "../../assets/icons/up.png";
 import downArrow from "../../assets/icons/down.png";
-import { statusChange } from "../../apis/card";
+import { statusChange, getCheckListCount } from "../../apis/card";
 import Checkbox from "../Checkbox/Checkbox";
+import Popup from "../Popup/Popup";
 import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Card = ({ cardData }) => {
+const Card = forwardRef(({ cardData }, ref) => {
   const [collapsed, setCollapsed] = useState(true);
+  const [checkListCount, setCheckListCount] = useState({});
   const [displayDueDate, setDisplayDueDate] = useState("");
   const [haveDueDate, setHaveDueDate] = useState(true);
   const [backgroundColor, setBackgroundColor] = useState("#cf3636");
-  const { fetchAllData } = useData();
+  const [showPopup, setShowPopup] = useState(false);
+  const { fetchAllData, checkListCountToggle } = useData();
   const { duration } = useDuration();
   const handleStatusChange = async (cardId, status) => {
     await statusChange(cardId, status);
     await fetchAllData(duration);
   };
+
   const handleCollapseBtn = () => {
     setCollapsed(!collapsed);
   };
 
+  useImperativeHandle(ref, () => ({
+    collapse: () => {
+      setCollapsed(true);
+    },
+  }));
+  // console.log("element to be invoked", crudElement);
+  const fetchCheckListCount = async (cardId) => {
+    try {
+      const response = await getCheckListCount(cardId);
+      setCheckListCount(response);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  };
+  const dotHandler = () => {
+    //setShowPopup(!showPopup);
+    setShowPopup(true);
+  };
+
   useEffect(() => {
     cardData.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
+
     const dueDate = moment(cardData.dueDate);
     const currentDateMoment = moment();
     const isAfter = currentDateMoment.isAfter(dueDate);
@@ -34,19 +67,31 @@ const Card = ({ cardData }) => {
     setBackgroundColor(color);
     setDisplayDueDate(dueDate.format("MMM DD"));
     console.log(isAfter);
-  }, [cardData]);
+    fetchCheckListCount(cardData._id);
+  }, [cardData, checkListCountToggle]);
   const keys = ["toDo", "backlog", "inProgress", "done"];
 
   return (
     <div className={styles.card}>
       <div className={styles.cardheader}>
-        <div className={styles.bullet}></div>
-        <div className="priority">{`${cardData.priority} priority`}</div>
+        <div className={styles.priority}>
+          {" "}
+          <div className={styles.bullet}></div>
+          {`${cardData.priority} priority`}
+        </div>
+        {/* <img onClick={dotHandler} src={dots} /> */}
+        <div onClick={dotHandler}>
+          <b className={styles.dots}>...</b>
+          {showPopup && <Popup cardData={cardData} />}
+        </div>
       </div>
       <div className="cardTitle">{cardData.title}</div>
       <div className="checkLists">
         <div className={styles.checkList}>
-          <div className="checkHead">CheckList (1/3)</div>
+          <div className="checkHead">
+            CheckList ({checkListCount?.completedChecklistItems}/
+            {checkListCount?.totalChecklistItems})
+          </div>
           <div className="collapseIcon" onClick={handleCollapseBtn}>
             <img src={collapsed ? downArrow : upArrow} alt="logo" />
           </div>
@@ -90,6 +135,5 @@ const Card = ({ cardData }) => {
       </div>
     </div>
   );
-};
-
+});
 export default Card;
