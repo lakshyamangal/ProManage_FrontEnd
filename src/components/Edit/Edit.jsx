@@ -3,12 +3,13 @@ import styles from "./Edit.module.css";
 import moment from "moment";
 import { editCard } from "../../apis/card";
 import { useData } from "../../Context/dataContext";
+import { useEditCard } from "../../Context/editContext";
 import { useDuration } from "../../Context/DurationContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-calendar/dist/Calendar.css";
 
-function Edit({ cardData, closeEditModal }) {
+function Edit({ cardData }) {
   const defaultTitle = cardData && cardData.title ? cardData.title : "";
   const defaultPriority =
     cardData && cardData.priority ? cardData.priority : "";
@@ -27,7 +28,7 @@ function Edit({ cardData, closeEditModal }) {
   const [showDatePicker, setShowDatePicker] = useState(false);
   const { fetchAllData } = useData();
   const { duration } = useDuration();
-
+  const { updateCardId } = useEditCard();
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -53,7 +54,8 @@ function Edit({ cardData, closeEditModal }) {
   };
 
   const handleCancel = () => {
-    closeEditModal();
+    // closeEditModal();
+    updateCardId(null);
   };
 
   const handleSave = async () => {
@@ -66,7 +68,8 @@ function Edit({ cardData, closeEditModal }) {
       selectedDate
     );
     await fetchAllData(duration);
-    closeEditModal();
+    // closeEditModal();
+    updateCardId(null);
   };
 
   const handleDateChange = (event) => {

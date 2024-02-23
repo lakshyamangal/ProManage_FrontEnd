@@ -5,12 +5,15 @@ import "./index.css";
 import { DurationProvider } from "./Context/DurationContext.jsx";
 import { DataProvider } from "./Context/dataContext.jsx";
 import { DeleteCardProvider } from "./Context/DeleteCardContext.jsx";
+import { EditCardProvider } from "./Context/editContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <DurationProvider>
     <DataProvider>
       <DeleteCardProvider>
-        <App />
+        <EditCardProvider>
+          <App />
+        </EditCardProvider>
       </DeleteCardProvider>
     </DataProvider>
   </DurationProvider>

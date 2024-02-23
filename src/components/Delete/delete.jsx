@@ -3,20 +3,28 @@ import styles from "./delete.module.css";
 import { useNavigate } from "react-router-dom";
 import { deleteCard } from "../../apis/card";
 import { useDeleteCard } from "../../Context/DeleteCardContext";
+import { useData } from "../../Context/dataContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useDuration } from "../../Context/DurationContext";
 
-function Delete({ cardData, closeDeleteModal }) {
+function Delete({ cardData }) {
+  const { fetchAllData } = useData();
+  const { duration } = useDuration();
   console.log("card data is --------__>", cardData);
+  const { updateDelCardId } = useDeleteCard();
   const deleteCardFunc = async () => {
     try {
       const response = await deleteCard(cardData._id);
       toast.success(response, {
         autoClose: 1000,
       });
-      closeDeleteModal();
+      // closeDeleteModal();
+      updateDelCardId(null);
+      await fetchAllData(duration);
     } catch (error) {
-      closeDeleteModal();
+      // closeDeleteModal();
+      updateDelCardId(null);
       toast.error(error.message, {
         autoClose: 1000,
       });
@@ -34,7 +42,7 @@ function Delete({ cardData, closeDeleteModal }) {
         <p className={styles.yes} onClick={deleteCardFunc}>
           Yes, Delete
         </p>
-        <p className={styles.cancel} onClick={() => closeDeleteModal()}>
+        <p className={styles.cancel} onClick={() => updateDelCardId(null)}>
           Cancel
         </p>
       </div>

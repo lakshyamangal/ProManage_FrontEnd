@@ -24,6 +24,7 @@ const Card = forwardRef(({ cardData }, ref) => {
   const [backgroundColor, setBackgroundColor] = useState("#cf3636");
   const [showPopup, setShowPopup] = useState(false);
   const { fetchAllData } = useData();
+
   const { duration } = useDuration();
   const handleStatusChange = async (cardId, status) => {
     await statusChange(cardId, status);
@@ -49,9 +50,13 @@ const Card = forwardRef(({ cardData }, ref) => {
       toast.error(error.message);
     }
   };
-  const dotHandler = () => {
-    //setShowPopup(!showPopup);
-    setShowPopup(true);
+  const dotHandler = (val) => {
+    console.log("dcdf ", val);
+    if (val) {
+      setShowPopup(true);
+    } else {
+      setShowPopup(false);
+    }
   };
   const getBulletColor = (priority) => {
     switch (priority) {
@@ -93,9 +98,16 @@ const Card = forwardRef(({ cardData }, ref) => {
           {`${cardData.priority} priority`}
         </div>
         {/* <img onClick={dotHandler} src={dots} /> */}
-        <div onClick={dotHandler}>
+        <div onClick={() => dotHandler(true)}>
           <b className={styles.dots}>...</b>
-          {showPopup && <Popup cardData={cardData} />}
+          {showPopup && (
+            <Popup
+              cardData={cardData}
+              hidePopup={dotHandler}
+              showPopup={showPopup}
+              dotHandler={dotHandler}
+            />
+          )}
         </div>
       </div>
       <div className={styles.cardTitle}>{cardData.title}</div>

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DashboardPage from "./pages/Dashboard/DashboardPage";
-import LoginPage from "./pages/loginPage";
-import RegisterPage from "./pages/registerPage";
+import LoginPage from "./pages/loginPage/loginPage";
+import RegisterPage from "./pages/registerPage/registerPage";
 
 function App() {
   return (

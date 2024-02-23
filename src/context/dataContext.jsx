@@ -18,7 +18,6 @@ export const DataProvider = ({ children }) => {
       toast.error(error.message);
     }
   };
-
   const toggleShowCreate = (status) => {
     setShowCreate(status);
   };
