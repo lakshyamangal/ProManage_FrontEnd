@@ -9,7 +9,6 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState({});
   const [keys, setKeys] = useState([]);
   const [showCreate, setShowCreate] = useState(false);
-  const [checkListCountToggle, setCheckListCountToggle] = useState(true);
   const fetchAllData = async (duration) => {
     try {
       const data = await getAllCards(duration);
@@ -19,9 +18,7 @@ export const DataProvider = ({ children }) => {
       toast.error(error.message);
     }
   };
-  const updateCheckListCountToggle = () => {
-    setCheckListCountToggle(!checkListCountToggle);
-  };
+
   const toggleShowCreate = (status) => {
     setShowCreate(status);
   };
@@ -31,8 +28,6 @@ export const DataProvider = ({ children }) => {
         data,
         keys,
         fetchAllData,
-        checkListCountToggle,
-        updateCheckListCountToggle,
         showCreate,
         toggleShowCreate,
       }}

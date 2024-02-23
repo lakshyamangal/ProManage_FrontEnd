@@ -11,7 +11,12 @@ function DurationDropdown() {
 
   return (
     <div>
-      <select id="dropdown" value={duration} onChange={handleChange}>
+      <select
+        style={{ borderStyle: "none" }}
+        id="dropdown"
+        value={duration}
+        onChange={handleChange}
+      >
         <option value="week">This week</option>
         <option value="month">This month</option>
         <option value="day">Today</option>

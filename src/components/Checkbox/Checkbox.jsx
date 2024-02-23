@@ -3,17 +3,18 @@ import styles from "./Checkbox.module.css";
 import { editCheckList } from "../../apis/card";
 import { toast } from "react-toastify";
 import { useData } from "../../Context/dataContext";
+import { useDuration } from "../../Context/DurationContext";
 // import { useDuration } from "../../Context/DurationContext";
 const Checkbox = ({ item, CardId }) => {
-  const { updateCheckListCountToggle } = useData();
-  // const { duration } = useDuration();
+  const { updateCheckListCountToggle, fetchAllData } = useData();
+  const { duration } = useDuration();
   const [isChecked, setIsChecked] = useState(item.isCompleted);
   const handleCheckboxChange = async (event, itemId, CardId) => {
     const prevValue = isChecked;
     try {
       setIsChecked(event.target.checked);
       await editCheckList(CardId, itemId, event.target.checked);
-      updateCheckListCountToggle();
+      await fetchAllData(duration);
     } catch (error) {
       setIsChecked(prevValue);
       toast.error(error.message);

@@ -20,20 +20,22 @@ function Board() {
   }, [duration]);
   return (
     <div className={styles.board}>
-      <div className={styles.dashboard}>
+      <div className={styles.headerContainer}>
         <div className={styles.header}>
-          <div className={styles.title}>{`Welcome! ${name}`}</div>
+          <div className={styles.titleName}>{`Welcome! ${name}`}</div>
           <div className={styles.date}>{formattedDate}</div>
         </div>
       </div>
-      <div className={styles.dashboard}>
+      <div className={styles.headerContainer}>
         <div className={styles.header}>
-          <div className={styles.title}>Board</div>
-          <DurationDropdown />
+          <div className={styles.titleBoard}>Board</div>
+          <div className={styles.titleDuration}>
+            <DurationDropdown />
+          </div>
         </div>
       </div>
       <div className={styles.scrollContainer}>
-        <div className={styles.container}>
+        <div className={styles.scroll}>
           {keys &&
             data &&
             keys.map((k) => {

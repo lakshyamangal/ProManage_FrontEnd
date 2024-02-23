@@ -24,7 +24,7 @@ const Card = forwardRef(({ cardData }, ref) => {
   const [haveDueDate, setHaveDueDate] = useState(true);
   const [backgroundColor, setBackgroundColor] = useState("#cf3636");
   const [showPopup, setShowPopup] = useState(false);
-  const { fetchAllData, checkListCountToggle } = useData();
+  const { fetchAllData } = useData();
   const { duration } = useDuration();
   const handleStatusChange = async (cardId, status) => {
     await statusChange(cardId, status);
@@ -68,7 +68,7 @@ const Card = forwardRef(({ cardData }, ref) => {
     setDisplayDueDate(dueDate.format("MMM DD"));
     console.log(isAfter);
     fetchCheckListCount(cardData._id);
-  }, [cardData, checkListCountToggle]);
+  }, [cardData]);
   const keys = ["toDo", "backlog", "inProgress", "done"];
 
   return (
