@@ -21,8 +21,8 @@ const Checkbox = ({ item, CardId }) => {
     }
   };
   return (
-    <div className={styles.checkList}>
-      <div className={styles.checkbox}>
+    <div className={styles.checkBox}>
+      <div className={styles.checkBoxBoolean}>
         <input
           type="checkbox"
           id={item._id}
@@ -32,7 +32,7 @@ const Checkbox = ({ item, CardId }) => {
           onChange={(e) => handleCheckboxChange(e, item._id, CardId)}
         />
       </div>
-      <div className="checkTitle">{item.title}</div>
+      <div className={styles.checkBoxTitle}>{item.title}</div>
     </div>
   );
 };

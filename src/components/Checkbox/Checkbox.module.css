@@ -1,10 +1,17 @@
-.checkbox {
-  padding: 0.5rem;
-}
-.checkList {
+.checkBox {
   display: flex;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+  flex-direction: row;
+  border: 1px solid #e2e2e2;
+  border-radius: 0.7rem;
   margin: 0.5rem 0;
   align-items: center;
+  padding: 0.5rem;
+  text-transform: capitalize;
+}
+.checkBoxBoolean {
+  margin-right: 0.5rem;
+}
+.checkBoxTitle {
+  font-family: Inter;
+  font-weight: 400;
 }

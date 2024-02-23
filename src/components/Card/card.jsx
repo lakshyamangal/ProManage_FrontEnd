@@ -16,7 +16,6 @@ import Popup from "../Popup/Popup";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const Card = forwardRef(({ cardData }, ref) => {
   const [collapsed, setCollapsed] = useState(true);
   const [checkListCount, setCheckListCount] = useState({});
@@ -54,6 +53,18 @@ const Card = forwardRef(({ cardData }, ref) => {
     //setShowPopup(!showPopup);
     setShowPopup(true);
   };
+  const getBulletColor = (priority) => {
+    switch (priority) {
+      case "high":
+        return "#FF2473";
+      case "moderate":
+        return "#18B0FF";
+      case "low":
+        return "#63C05B";
+      default:
+        return "gray";
+    }
+  };
 
   useEffect(() => {
     cardData.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
@@ -61,9 +72,8 @@ const Card = forwardRef(({ cardData }, ref) => {
     const dueDate = moment(cardData.dueDate);
     const currentDateMoment = moment();
     const isAfter = currentDateMoment.isAfter(dueDate);
-
     const color =
-      cardData.status == "done" ? "#63c05b" : isAfter ? "#cf3636" : "#5a5a5a";
+      cardData.status == "done" ? "#63c05b" : isAfter ? "#cf3636" : "#DBDBDB";
     setBackgroundColor(color);
     setDisplayDueDate(dueDate.format("MMM DD"));
     console.log(isAfter);
@@ -76,7 +86,10 @@ const Card = forwardRef(({ cardData }, ref) => {
       <div className={styles.cardheader}>
         <div className={styles.priority}>
           {" "}
-          <div className={styles.bullet}></div>
+          <div
+            className={styles.bullet}
+            style={{ backgroundColor: getBulletColor(cardData.priority) }}
+          ></div>
           {`${cardData.priority} priority`}
         </div>
         {/* <img onClick={dotHandler} src={dots} /> */}
@@ -85,10 +98,10 @@ const Card = forwardRef(({ cardData }, ref) => {
           {showPopup && <Popup cardData={cardData} />}
         </div>
       </div>
-      <div className="cardTitle">{cardData.title}</div>
-      <div className="checkLists">
-        <div className={styles.checkList}>
-          <div className="checkHead">
+      <div className={styles.cardTitle}>{cardData.title}</div>
+      <div className={styles.checkListContainer}>
+        <div className={styles.checkListCount}>
+          <div className={styles.checkListCountTitle}>
             CheckList ({checkListCount?.completedChecklistItems}/
             {checkListCount?.totalChecklistItems})
           </div>
@@ -96,41 +109,43 @@ const Card = forwardRef(({ cardData }, ref) => {
             <img src={collapsed ? downArrow : upArrow} alt="logo" />
           </div>
         </div>
-        {!collapsed &&
-          cardData &&
-          cardData.checkList &&
-          cardData.checkList.map((item) => {
-            console.log("cardData ", cardData._id);
-            return (
-              <Checkbox key={item._id} item={item} CardId={cardData._id} />
-            );
-          })}
-        <div className={styles.cardFooter}>
-          <div>
-            {haveDueDate && (
-              <div
-                style={{ backgroundColor: backgroundColor }}
-                className={styles.date}
-              >
-                {displayDueDate}
-              </div>
-            )}
-          </div>
-          <div className={styles.switchSection}>
-            {keys.map((key) => {
-              if (!cardData.status.includes(key)) {
-                return (
-                  <div
-                    key={key}
-                    className={styles.sectionBtn}
-                    onClick={() => handleStatusChange(cardData._id, key)}
-                  >
-                    {key}
-                  </div>
-                );
-              }
+        <div className={styles.checkListDropdown}>
+          {!collapsed &&
+            cardData &&
+            cardData.checkList &&
+            cardData.checkList.map((item) => {
+              console.log("cardData ", cardData._id);
+              return (
+                <Checkbox key={item._id} item={item} CardId={cardData._id} />
+              );
             })}
-          </div>
+        </div>
+      </div>
+      <div className={styles.cardFooter}>
+        <div>
+          {haveDueDate && (
+            <div
+              style={{ backgroundColor: backgroundColor }}
+              className={styles.date}
+            >
+              {displayDueDate}
+            </div>
+          )}
+        </div>
+        <div className={styles.switchSection}>
+          {keys.map((key) => {
+            if (!cardData.status.includes(key)) {
+              return (
+                <div
+                  key={key}
+                  className={styles.sectionBtn}
+                  onClick={() => handleStatusChange(cardData._id, key)}
+                >
+                  {key}
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </div>
