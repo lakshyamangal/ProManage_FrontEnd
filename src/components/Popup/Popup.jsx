@@ -4,6 +4,8 @@ import Delete from "../Delete/delete";
 import Edit from "../Edit/Edit";
 import { useEditCard } from "../../Context/editContext";
 import { useDeleteCard } from "../../Context/DeleteCardContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Popup = ({ cardData, hidePopup, showPopup, dotHandler }) => {
   const { updateDelCardId } = useDeleteCard();
@@ -43,6 +45,17 @@ const Popup = ({ cardData, hidePopup, showPopup, dotHandler }) => {
     count = count + 1;
   };
 
+  const copyToClipboard = async (url) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      toast.success("Share Link Copied Successfully", {
+        autoClose: 1000,
+      });
+    } catch (error) {
+      toast.error(err.message);
+    }
+  };
+
   useEffect(() => {
     // Add event listener when the component mounts
     document.addEventListener("click", handleClickOutside);
@@ -57,11 +70,11 @@ const Popup = ({ cardData, hidePopup, showPopup, dotHandler }) => {
       <div className={styles.crudOptions} onClick={openEditModal}>
         Edit
       </div>
-      <div className={styles.crudOptions}>Share</div>
-      <div>
-        {/* {showEdit && (
-          <Edit cardData={cardData} closeEditModal={closeEditModal} />
-        )} */}
+      <div
+        className={styles.crudOptions}
+        onClick={() => copyToClipboard("abhinav_is_sexy")}
+      >
+        Share
       </div>
       <div
         className={styles.crudOptions}
@@ -70,9 +83,6 @@ const Popup = ({ cardData, hidePopup, showPopup, dotHandler }) => {
       >
         Delete
       </div>
-      {/* {showDelete && (
-        <Delete cardData={cardData} closeDeleteModal={closeDeleteModal} />
-      )} */}
     </div>
   );
 };
