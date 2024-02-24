@@ -1,0 +1,44 @@
+.container {
+  width: 40vw;
+  padding: 10vw;
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.h1 {
+  font-size: 2rem;
+  margin-bottom: 6vh;
+  font-weight: 900;
+}
+.input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  margin: 12px 0px;
+  height: 18px;
+  border: 2px solid #c2c2c2;
+  box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.01);
+}
+
+.button {
+  width: 40%;
+  /* height: 28px; */
+  padding: 8px;
+  font-size: 20px;
+  background: #17a2b8;
+  box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.01);
+  border-radius: 5px;
+  color: white;
+  border: none;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.underline {
+  margin: 4px;
+  font-weight: 700;
+  text-decoration: underline;
+}
