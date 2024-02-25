@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { useDuration } from "../../Context/DurationContext";
 import { useDeleteCard } from "../../Context/DeleteCardContext";
+import { useClosePopupCard } from "../../Context/closePopup";
 import { useData } from "../../Context/dataContext";
 import styles from "./card.module.css";
 import upArrow from "../../assets/icons/up.png";
@@ -24,7 +25,8 @@ const Card = forwardRef(({ cardData }, ref) => {
   const [backgroundColor, setBackgroundColor] = useState("#cf3636");
   const [showPopup, setShowPopup] = useState(false);
   const { fetchAllData } = useData();
-
+  const { updateOpen, isOpen } = useClosePopupCard();
+  // const { isOpen } = useClosePopupCard();
   const { duration } = useDuration();
   const handleStatusChange = async (cardId, status) => {
     await statusChange(cardId, status);
@@ -98,14 +100,13 @@ const Card = forwardRef(({ cardData }, ref) => {
           {`${cardData.priority} priority`}
         </div>
         {/* <img onClick={dotHandler} src={dots} /> */}
-        <div onClick={() => dotHandler(true)}>
+        <div onClick={() => updateOpen(true, "ffvf")}>
           <b className={styles.dots}>...</b>
-          {showPopup && (
+          {isOpen && (
             <Popup
               cardData={cardData}
               hidePopup={dotHandler}
               showPopup={showPopup}
-              dotHandler={dotHandler}
             />
           )}
         </div>

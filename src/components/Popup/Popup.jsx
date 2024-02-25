@@ -4,33 +4,32 @@ import Delete from "../Delete/delete";
 import Edit from "../Edit/Edit";
 import { useEditCard } from "../../Context/editContext";
 import { useDeleteCard } from "../../Context/DeleteCardContext";
+import { useClosePopupCard } from "../../Context/closePopup";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Popup = ({ cardData, hidePopup, showPopup, dotHandler }) => {
+const Popup = ({ cardData, hidePopup, showPopup }) => {
+  const { updateOpen } = useClosePopupCard();
   const { updateDelCardId } = useDeleteCard();
   let count = 0;
   const { updateCardId, updateKey } = useEditCard();
-  const openDeleteModal = () => {
+  const openDeleteModal = (event) => {
+    // debugger;
     updateDelCardId(cardData);
-    dotHandler(false);
+    console.log("calling ");
+
+    //to toggle the isOpen state when an action occurs within the Popup component, but this action also triggers the onClick event of the parent div. To prevent this from happening, you can stop the propagation of the click event within the Popup component.
+    event.stopPropagation();
+
+    updateOpen(false, "del");
     // setShowDelete(true);
   };
 
-  const closeDeleteModal = () => {
-    updateDelCardId(null);
-    // setShowDelete(false);
-  };
-
-  const openEditModal = () => {
+  const openEditModal = (event) => {
+    event.stopPropagation();
     updateCardId(cardData);
+    updateOpen(false, "edit");
     // setShowEdit(true);
-  };
-
-  const closeEditModal = () => {
-    // setShowEdit(false);
-    updateCardId(null);
-    updateKey(null);
   };
   const divRef = useRef(null);
   // Function to handle clicks outside of the div
@@ -40,7 +39,7 @@ const Popup = ({ cardData, hidePopup, showPopup, dotHandler }) => {
       divRef.current &&
       !divRef.current.contains(event.target)
     ) {
-      hidePopup(false);
+      updateOpen(false, "click");
     }
     count = count + 1;
   };
@@ -72,7 +71,13 @@ const Popup = ({ cardData, hidePopup, showPopup, dotHandler }) => {
       </div>
       <div
         className={styles.crudOptions}
-        onClick={() => copyToClipboard("abhinav_is_sexy")}
+        onClick={(event) => {
+          event.stopPropagation();
+          copyToClipboard(
+            `http://localhost:5173/dashboard/card/${cardData._id}`
+          );
+          updateOpen(false);
+        }}
       >
         Share
       </div>

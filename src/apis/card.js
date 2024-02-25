@@ -111,3 +111,16 @@ export const editCard = async (cardId, title, priority, checkList, dueDate) => {
     return Promise.reject(error);
   }
 };
+
+export const getSingleCard = async (cardId) => {
+  try {
+    const reqUrl = `${backendUrl}/card/getSingleCard/${cardId}`;
+    const response = await axios.get(reqUrl);
+    console.log(response.data.data);
+    if (!response.data.success) throw new Error(response.data.data);
+    return response.data.data;
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error);
+  }
+};
