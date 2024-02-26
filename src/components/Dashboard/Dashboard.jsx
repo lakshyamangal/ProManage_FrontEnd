@@ -6,7 +6,7 @@ import { useData } from "../../Context/dataContext";
 import { useEditCard } from "../../Context/editContext";
 import { useDeleteCard } from "../../Context/DeleteCardContext";
 import SettingsPage from "../Settings/settings";
-import Analytics from "../Analytics/analytics";
+import Analytics from "../analytics/analytics";
 import LogOut from "../Logout/logOut";
 import Delete from "../Delete/delete";
 import { ToastContainer, toast } from "react-toastify";

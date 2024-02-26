@@ -15,7 +15,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/Dashboard" element={<DashboardPage />} />
         <Route path="/Dashboard/card/:cardId" element={<Public />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
