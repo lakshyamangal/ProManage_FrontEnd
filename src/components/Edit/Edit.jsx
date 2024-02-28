@@ -59,18 +59,23 @@ function Edit({ cardData }) {
     updateCardId(null);
   };
 
-  const handleSave = async () => {
-    console.log("------------------>", checklistItems);
-    await editCardHandler(
-      cardData._id,
-      title,
-      priority,
-      checklistItems,
-      selectedDate
-    );
-    await fetchAllData(duration);
-    // closeEditModal();
-    updateCardId(null);
+  const handleSave = async (event) => {
+    try {
+      console.log("------------------>", checklistItems);
+      event.stopPropagation();
+      await editCardHandler(
+        cardData._id,
+        title,
+        priority,
+        checklistItems,
+        selectedDate
+      );
+      await fetchAllData(duration);
+      // closeEditModal();
+      updateCardId(null);
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   const handleDateChange = (value) => {

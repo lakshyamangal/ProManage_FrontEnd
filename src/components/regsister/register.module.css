@@ -50,7 +50,7 @@
 }
 
 .button {
-  width: 100%;
+  min-width: 20rem;
   /* height: 28px; */
   padding: 8px;
   border-radius: 12rem;
@@ -75,7 +75,7 @@
 }
 
 .button2 {
-  width: 100%;
+  min-width: 20rem;
   /* height: 28px; */
   padding: 8px;
   border-radius: 12rem;

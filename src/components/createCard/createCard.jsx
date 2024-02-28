@@ -122,6 +122,7 @@ function Create() {
               value="high"
               checked={priority === "high"}
               onChange={handlePriorityChange}
+              style={{ accentColor: "#FF2473" }}
             />
             High Priority
           </label>
@@ -136,6 +137,7 @@ function Create() {
               value="moderate"
               checked={priority === "moderate"}
               onChange={handlePriorityChange}
+              style={{ accentColor: "#18B0FF" }}
             />
             Moderate Priority
           </label>
@@ -150,6 +152,7 @@ function Create() {
               value="low"
               checked={priority === "low"}
               onChange={handlePriorityChange}
+              style={{ accentColor: "#63C05B" }}
             />
             Low Priority
           </label>

@@ -35,8 +35,15 @@ const Card = forwardRef(({ cardData }, ref) => {
   // const { isOpen } = useClosePopupCard();
   const { duration } = useDuration();
   const handleStatusChange = async (cardId, status) => {
-    await statusChange(cardId, status);
-    await fetchAllData(duration);
+    try {
+      await statusChange(cardId, status);
+      toast.success("Status of Task Changed  Successfully", {
+        autoClose: 1000,
+      });
+      await fetchAllData(duration);
+    } catch (err) {
+      toast.error(err.message);
+    }
   };
 
   const handleCollapseBtn = () => {

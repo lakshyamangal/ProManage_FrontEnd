@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useData } from "../../Context/dataContext";
-import add from "../../assets/icons/add.png";
 import styles from "./section.module.css";
 import Card from "../Card/card";
 import collapse from "../../assets/icons/collapse.png";
-import Create from "../createCard/createCard";
+
 function Section({ item }) {
   const { data, toggleShowCreate } = useData();
   const [secData, setSecData] = useState();
@@ -19,6 +18,12 @@ function Section({ item }) {
     });
   };
 
+  const headerMapping = {
+    backlog: "Backlog",
+    toDo: "To do",
+    inProgress: "In progress",
+    done: "Done",
+  };
   useEffect(() => {
     console.log("data ", data, item);
     setSecData(data[item]);
@@ -27,7 +32,7 @@ function Section({ item }) {
   return (
     <div className={styles.section}>
       <div className={styles.sectionHeader}>
-        <div className={styles.title}>{item}</div>
+        <div className={styles.title}>{headerMapping[item]}</div>
         <div className={styles.titleOptions}>
           {" "}
           {item === "toDo" && (
