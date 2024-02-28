@@ -6,6 +6,7 @@ import { useEditCard } from "../../Context/editContext";
 import { useDeleteCard } from "../../Context/DeleteCardContext";
 import { useClosePopupCard } from "../../Context/closePopup";
 import { ToastContainer, toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const Popup = ({ cardData, hidePopup, showPopup }) => {
@@ -13,6 +14,9 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
   const { updateDelCardId } = useDeleteCard();
   let count = 0;
   const { updateCardId, updateKey } = useEditCard();
+
+  const currentUrl = window.location.href;
+
   const openDeleteModal = (event) => {
     // debugger;
     updateDelCardId(cardData);
@@ -57,6 +61,8 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
   };
 
   useEffect(() => {
+    console.log(currentUrl);
+
     // Add event listener when the component mounts
     document.addEventListener("click", handleClickOutside);
 
@@ -74,9 +80,7 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
         className={styles.crudOptions}
         onClick={(event) => {
           event.stopPropagation();
-          copyToClipboard(
-            `https://pro-manage-frontend-six.vercel.app/dashboard/card/${cardData._id}`
-          );
+          copyToClipboard(`${currentUrl}/card/${cardData._id}`);
           updateOpen(false);
           hidePopup(false);
         }}
