@@ -75,7 +75,7 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
         onClick={(event) => {
           event.stopPropagation();
           copyToClipboard(
-            `http://localhost:5173/dashboard/card/${cardData._id}`
+            `https://pro-manage-frontend-six.vercel.app/dashboard/card/${cardData._id}`
           );
           updateOpen(false);
           hidePopup(false);
