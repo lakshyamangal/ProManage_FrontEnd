@@ -13,7 +13,6 @@ function Public() {
   const [haveDueDate, setHaveDueDate] = useState(true);
   const { cardId } = useParams();
   const [cardData, setCardData] = useState(null);
-  const [collapsed, setCollapsed] = useState(true);
   const [checkListCount, setCheckListCount] = useState({});
   const [displayDueDate, setDisplayDueDate] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("#cf3636");
@@ -52,12 +51,13 @@ function Public() {
       cardData?.status == "done" ? "#63c05b" : isAfter ? "#cf3636" : "#DBDBDB";
     setBackgroundColor(color);
     setDisplayDueDate(dueDate.format("MMM DD"));
-    console.log(isAfter);
+
     fetchCheckListCount(cardData?._id);
   }, []);
   const fetchCardDetails = async (cardId) => {
     try {
       const response = await getSingleCard(cardId);
+      console.log("isAfter ", response);
       setCardData(response);
       console.log(response);
     } catch (error) {
@@ -103,6 +103,7 @@ function Public() {
                       key={item._id}
                       item={item}
                       CardId={cardData._id}
+                      disabled={true}
                     />
                   );
                 })}

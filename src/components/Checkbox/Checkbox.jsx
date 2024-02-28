@@ -5,11 +5,14 @@ import { toast } from "react-toastify";
 import { useData } from "../../Context/dataContext";
 import { useDuration } from "../../Context/DurationContext";
 // import { useDuration } from "../../Context/DurationContext";
-const Checkbox = ({ item, CardId }) => {
+const Checkbox = ({ item, CardId, disabled }) => {
   const { updateCheckListCountToggle, fetchAllData } = useData();
   const { duration } = useDuration();
   const [isChecked, setIsChecked] = useState(item.isCompleted);
   const handleCheckboxChange = async (event, itemId, CardId) => {
+    if (disabled) {
+      return;
+    }
     const prevValue = isChecked;
     try {
       setIsChecked(event.target.checked);
@@ -30,7 +33,9 @@ const Checkbox = ({ item, CardId }) => {
           name={item.title}
           checked={isChecked}
           value={isChecked}
-          onChange={(e) => handleCheckboxChange(e, item._id, CardId)}
+          onChange={(e) => {
+            handleCheckboxChange(e, item._id, CardId);
+          }}
         />
       </div>
       <div className={styles.checkBoxTitle}>{item.title}</div>

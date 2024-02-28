@@ -30,25 +30,25 @@
   height: 76vh;
   background-color: #fff;
   margin-top: 1rem;
-  margin-right: 0.5rem;
   border-radius: 10px;
   position: relative;
   border: 2px solid #edf5fe;
   font-family: poppins;
   display: flex;
   flex-direction: column;
+  align-self: center;
 }
 
 @media only screen and (max-width: 600px) {
   .card {
     width: 90vw;
-    height: 70vh;
-  }
-  .checkListContainer {
-    height: 50%;
+    height: 78vh;
   }
   .checkListScrollContainer {
-    height: 70%;
+    height: 67%;
+  }
+  .checkListContainer {
+    overflow: auto;
   }
 }
 .dueDate {

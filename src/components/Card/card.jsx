@@ -122,12 +122,7 @@ const Card = forwardRef(({ cardData }, ref) => {
           )}
         </div>
       </div>
-      <div
-        className={styles.cardTitle}
-        title={cardData.title}
-        onMouseEnter={() => handleShowTooltip(true)}
-        onMouseLeave={() => handleShowTooltip(false)}
-      >
+      <div className={styles.cardTitle} title={cardData.title}>
         {title}
       </div>
       <div className={styles.checkListContainer}>
