@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useDebugValue, useState } from "react";
 import styles from "./createCard.module.css";
 import moment from "moment";
 import { createCard } from "../../apis/card";
@@ -50,11 +50,17 @@ function Create() {
     toggleShowCreate(false);
   };
 
-  const handleSave = async () => {
-    console.log("------------------>", checklistItems);
-    await createCardHandler(title, priority, checklistItems, selectedDate);
-    await fetchAllData(duration);
-    toggleShowCreate(false);
+  const handleSave = async (event) => {
+    try {
+      event.stopPropagation();
+      // if (title.trim() == "") throw new Error("Title is required!");
+      // if (priority == "") throw new Error("priority is a required field");
+      await createCardHandler(title, priority, checklistItems, selectedDate);
+      await fetchAllData(duration);
+      toggleShowCreate(false);
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const handleDateChange = (event) => {

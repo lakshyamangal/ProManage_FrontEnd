@@ -66,6 +66,9 @@
   border-radius: 50%;
   margin-right: 0.5rem;
 }
+.checkBox {
+  accent-color: #17a2b8;
+}
 .checkList {
   max-height: 40%;
 }

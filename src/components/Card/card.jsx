@@ -22,6 +22,7 @@ import { useEditCard } from "../../Context/editContext";
 const Card = forwardRef(({ cardData }, ref) => {
   const [collapsed, setCollapsed] = useState(true);
   const [charLength, setCharLength] = useState(cardData.title.length);
+  // const [title, setTitle] = useState(cardData.title);
   const [title, setTitle] = useState(cardData.title);
   const [checkListCount, setCheckListCount] = useState({});
   const [displayDueDate, setDisplayDueDate] = useState("");
@@ -123,6 +124,7 @@ const Card = forwardRef(({ cardData }, ref) => {
       </div>
       <div
         className={styles.cardTitle}
+        title={cardData.title}
         onMouseEnter={() => handleShowTooltip(true)}
         onMouseLeave={() => handleShowTooltip(false)}
       >

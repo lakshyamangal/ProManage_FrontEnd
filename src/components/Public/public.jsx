@@ -20,6 +20,7 @@ function Public() {
 
   const fetchCheckListCount = async (cardId) => {
     try {
+      console.log(cardId);
       const response = await getCheckListCount(cardId);
       setCheckListCount(response);
     } catch (error) {
@@ -67,8 +68,10 @@ function Public() {
   return (
     <div className={styles.cardContainer}>
       <div className={styles.logo}>
-        <img src={ProMangage} alt="logo" />
-        <div className={styles.titleMain}>Pro Manage</div>
+        <div className={styles.logoChild}>
+          <img src={ProMangage} alt="logo" />
+          <div className={styles.titleMain}>Pro Manage</div>{" "}
+        </div>
       </div>
       <div className={styles.card}>
         <div className={styles.cardheader}>

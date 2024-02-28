@@ -1,20 +1,30 @@
 .cardContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   height: 100vh;
 }
 .logo {
-  width: 97vw;
-  padding: 1.5rem;
   align-items: center;
   display: flex;
+  align-items: left;
+  justify-content: left;
+  width: 100vw;
 }
+.logoChild {
+  display: flex;
+  align-items: center;
+  margin-left: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+}
+
 .titleMain {
   font-weight: 700;
   margin: 0.5rem;
 }
+
 .card {
   width: 40vw;
   height: 76vh;
@@ -25,6 +35,21 @@
   position: relative;
   border: 2px solid #edf5fe;
   font-family: poppins;
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 90vw;
+    height: 70vh;
+  }
+  .checkListContainer {
+    height: 50%;
+  }
+  .checkListScrollContainer {
+    height: 70%;
+  }
 }
 .dueDate {
   display: flex;
@@ -103,6 +128,7 @@
 .checkListContainer {
   padding: 1rem;
   font-family: Inter;
+  height: 75%;
 }
 .checkListCount {
   display: flex;
@@ -114,9 +140,11 @@
   font-size: 0.9rem;
 }
 .checkListScrollContainer {
-  height: 70%;
   margin-top: 1rem;
+  max-height: 95%;
   overflow: auto;
+  width: 100%;
+  border: #000;
 }
 .checkListScroll {
   display: flex;
@@ -149,7 +177,16 @@
 .cardFooter {
   display: flex;
   justify-content: space-between;
-  padding: 0rem 1rem 0.6rem 1rem;
   font-weight: 500;
   color: #767575;
+  margin: 1rem;
+  margin-top: auto;
+}
+.checkListScrollContainer::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.checkListScrollContainer::-webkit-scrollbar-thumb {
+  background: #8daab9cc;
+  border-radius: 1rem;
 }

@@ -24,6 +24,7 @@ const Checkbox = ({ item, CardId }) => {
     <div className={styles.checkBox}>
       <div className={styles.checkBoxBoolean}>
         <input
+          className={styles.checkBoxInput}
           type="checkbox"
           id={item._id}
           name={item.title}
