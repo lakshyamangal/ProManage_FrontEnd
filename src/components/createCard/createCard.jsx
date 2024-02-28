@@ -9,6 +9,7 @@ import "react-calendar/dist/Calendar.css";
 import { useData } from "../../Context/dataContext";
 import { useDuration } from "../../Context/DurationContext";
 import deleteIcon from "../../assets/icons/Delete.png";
+import Calendar from "../Calendar/Calendar";
 function Create() {
   const [title, setTitle] = useState("");
   const [priority, setPriority] = useState("");
@@ -52,19 +53,25 @@ function Create() {
 
   const handleSave = async (event) => {
     try {
+      console.log("check ", checklistItems);
       event.stopPropagation();
-      // if (title.trim() == "") throw new Error("Title is required!");
-      // if (priority == "") throw new Error("priority is a required field");
+      if (title.trim() == "") throw new Error("Title is required!");
+      if (priority == "") throw new Error("priority is a required field");
+      checklistItems.map((item) => {
+        if (item.title.trim() == "") {
+          throw new Error("Title of checklist should not be empty!");
+        }
+      });
       await createCardHandler(title, priority, checklistItems, selectedDate);
       await fetchAllData(duration);
-      toggleShowCreate(false);
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
+  const handleDateChange = (value) => {
+    setSelectedDate(value);
+    console.log("called", value);
     setShowDatePicker(false);
   };
 
@@ -79,16 +86,17 @@ function Create() {
     dueDate
   ) => {
     try {
-      const isoDate = moment(dueDate, "YYYY-MM-DD").toISOString();
+      console.log("dueDate ", dueDate);
       const response = await createCard(
         title,
         priority,
         checklistItems,
-        isoDate
+        dueDate
       );
       toast.success("Card Created Successfully", {
         autoClose: 1000,
       });
+      toggleShowCreate(false);
     } catch (err) {
       toast.error(err.message);
     }
@@ -200,25 +208,13 @@ function Create() {
         </div>
         <div className={styles.footer}>
           <div className={styles.datePickerContainer}>
-            {showDatePicker ? (
-              <label className={styles.dueDateLabel} htmlFor="dueDate">
-                <input
-                  className={styles.dueDateDisplay}
-                  type="date"
-                  id="dueDate"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                />
-              </label>
-            ) : (
-              <button
-                className={styles.dueDateButton}
-                onClick={handleToggleDatePicker}
-              >
-                {selectedDate ? selectedDate : "Select Due Date"}
-              </button>
-            )}
+            <Calendar
+              selectedDate={selectedDate}
+              handleDateChange={handleDateChange}
+              onClose={() => setShowDatePicker(false)}
+            />
           </div>
+
           <div className={styles.subfooter}>
             <div className={styles.cancel} onClick={handleCancel}>
               Cancel

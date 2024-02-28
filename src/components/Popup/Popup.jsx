@@ -26,7 +26,6 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
     event.stopPropagation();
 
     updateOpen(false, "del");
-    setShowDelete(true);
   };
 
   const openEditModal = (event) => {

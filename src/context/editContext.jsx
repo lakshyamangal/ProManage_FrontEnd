@@ -11,10 +11,6 @@ export const EditCardProvider = ({ children }) => {
   const updateKey = (val) => {
     setKey(val);
   };
-  // const [showDelete, setShowDelete] = useState(false);
-  // const updateShowDelete = (status) => {
-  // setShowDelete(status);
-  // };
 
   return (
     <EditCardContext.Provider value={{ cardId, updateCardId, key, updateKey }}>
