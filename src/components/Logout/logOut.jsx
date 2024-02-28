@@ -11,7 +11,7 @@ function LogOut({ changelogOut }) {
     try {
       localStorage.removeItem("userName");
       localStorage.removeItem("token");
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       toast.error(err.message);
     }

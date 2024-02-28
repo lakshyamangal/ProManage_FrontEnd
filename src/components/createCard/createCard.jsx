@@ -23,6 +23,7 @@ function Create() {
   };
 
   const handlePriorityChange = (e) => {
+    console.log(e.target.value);
     setPriority(e.target.value);
   };
 
@@ -38,7 +39,10 @@ function Create() {
 
   const handleDeleteChecklistItem = (index) => {
     const updatedItems = [...checklistItems];
+    console.log("before splice------------>", checklistItems);
+    console.log(index);
     updatedItems.splice(index, 1);
+    console.log("after splice--------------->", updatedItems);
     setChecklistItems(updatedItems);
   };
 
@@ -83,7 +87,6 @@ function Create() {
       toast.error(err.message);
     }
   };
-
   return (
     <div className={styles.create}>
       <div className={styles.box}>
@@ -101,7 +104,9 @@ function Create() {
           <div>
             Select Priority<span className={styles.required}>*</span>
           </div>
-          <label>
+          <label
+            style={{ background: priority === "high" ? "#EEECEC" : "white" }}
+          >
             <input
               type="radio"
               name="priority"
@@ -111,7 +116,11 @@ function Create() {
             />
             High Priority
           </label>
-          <label>
+          <label
+            style={{
+              background: priority === "moderate" ? "#EEECEC" : "white",
+            }}
+          >
             <input
               type="radio"
               name="priority"
@@ -121,7 +130,11 @@ function Create() {
             />
             Moderate Priority
           </label>
-          <label>
+          <label
+            style={{
+              background: priority === "low" ? "#EEECEC" : "white",
+            }}
+          >
             <input
               type="radio"
               name="priority"
@@ -135,7 +148,7 @@ function Create() {
         <div className={styles.checkList}>
           <span className={styles.checkListTitle}>CheckList</span>
           <span className={styles.countDisplay}>
-            ( {checklistItems.filter((item) => item.checked).length}/
+            ( {checklistItems.filter((item) => item.isCompleted).length}/
             {checklistItems.length})
           </span>
           <span className={styles.required}>*</span>
@@ -147,7 +160,7 @@ function Create() {
                     className={styles.checkBox}
                     type="checkbox"
                     id={`item-${index}`}
-                    checked={item.checke}
+                    checked={item.isCompleted}
                     onChange={(e) =>
                       handleChecklistItemChange(
                         index,
@@ -159,8 +172,8 @@ function Create() {
                   <input
                     className={styles.checkListInput}
                     type="text"
-                    value={item.text}
-                    placeholder="Add a task"
+                    value={item.title}
+                    placeholder="Add a Task"
                     onChange={(e) =>
                       handleChecklistItemChange(index, "title", e.target.value)
                     }
@@ -180,15 +193,17 @@ function Create() {
           + Add New
         </div>
         <div className={styles.footer}>
-          <div>
+          <div className={styles.datePickerContainer}>
             {showDatePicker ? (
-              <input
-                className={styles.dueDateDisplay}
-                type="date"
-                id="dueDate"
-                value={selectedDate}
-                onChange={handleDateChange}
-              />
+              <label className={styles.dueDateLabel} htmlFor="dueDate">
+                <input
+                  className={styles.dueDateDisplay}
+                  type="date"
+                  id="dueDate"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                />
+              </label>
             ) : (
               <button
                 className={styles.dueDateButton}

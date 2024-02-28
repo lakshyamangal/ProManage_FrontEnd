@@ -22,6 +22,7 @@
 .titleDuration {
   font-weight: 400;
   font-size: 1rem;
+  outline: none;
 }
 .scrollContainer {
   width: 85vw;

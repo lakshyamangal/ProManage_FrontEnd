@@ -12,7 +12,7 @@ function DurationDropdown() {
   return (
     <div>
       <select
-        style={{ borderStyle: "none" }}
+        style={{ borderStyle: "none", outline: "none" }}
         id="dropdown"
         value={duration}
         onChange={handleChange}

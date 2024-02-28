@@ -34,7 +34,7 @@
   color: #9b959f;
   border-radius: 0.4rem;
   margin-bottom: 1rem;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 .titleInput:focus {
   outline: none;
@@ -59,6 +59,13 @@
 .priority input {
   margin-right: 0.3rem;
 }
+.bullet {
+  background-color: green;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
 .checkList {
   max-height: 40%;
 }
@@ -70,6 +77,7 @@
 }
 
 .scrollContainer {
+  margin-top: 1rem;
   max-height: 80%;
   overflow: auto;
   width: 100%;
@@ -84,19 +92,19 @@
 
 .checkListItem {
   padding: 0.6rem;
-  margin: 0.4rem;
+  margin: 0.5rem;
   border: 1px solid #e2e2e2;
   display: flex;
   flex-direction: row;
   justify-content: center;
   border-radius: 0.4rem;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 .checkListInput {
   width: 95%;
   height: 100%;
-  font-size: 1rem;
+  font-size: 0.9rem;
   align-items: center;
 }
 .checkListInput:focus {
@@ -124,7 +132,7 @@
 }
 .dueDateButton {
   background-color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   padding: 0.6rem 0rem;
   margin-left: 1rem;
   color: #707070;
@@ -134,7 +142,7 @@
 }
 .dueDateDisplay {
   background-color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   padding: 0.6rem 0rem;
   margin-left: 1rem;
   color: #707070;
@@ -142,13 +150,24 @@
   border-radius: 0.5rem;
   width: 9rem;
 }
+
+.datePickerContainer {
+  position: relative;
+}
+
+.dueDateLabel {
+  position: absolute;
+  bottom: calc(100% + 10px); /* Adjust the value as needed */
+  z-index: 1000; /* Ensure the calendar is above other elements */
+}
+
 .subfooter {
   display: flex;
   flex-direction: row;
 }
 
 .cancel {
-  font-size: 1rem;
+  font-size: 0.9rem;
   padding: 0.6rem 0rem;
   border: 1px solid #cf3636;
   border-radius: 0.5rem;
@@ -158,7 +177,7 @@
   color: #cf3636;
 }
 .save {
-  font-size: 1rem;
+  font-size: 0.9rem;
   padding: 0.6rem 0rem;
   width: 9rem;
   border-radius: 0.5rem;
@@ -169,8 +188,6 @@
 
 .scrollContainer::-webkit-scrollbar {
   width: 0.9rem;
-}
-.scrollContainer::-webkit-scrollbar-track {
 }
 
 .scrollContainer::-webkit-scrollbar-thumb {
