@@ -53,7 +53,6 @@ function Create() {
 
   const handleSave = async (event) => {
     try {
-      console.log("check ", checklistItems);
       event.stopPropagation();
       if (title.trim() == "") throw new Error("Title is required!");
       if (priority == "") throw new Error("priority is a required field");
@@ -73,10 +72,6 @@ function Create() {
     setSelectedDate(value);
     console.log("called", value);
     setShowDatePicker(false);
-  };
-
-  const handleToggleDatePicker = () => {
-    setShowDatePicker(!showDatePicker);
   };
 
   const createCardHandler = async (

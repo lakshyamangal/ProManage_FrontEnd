@@ -8,6 +8,8 @@ import { useDuration } from "../../Context/DurationContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-calendar/dist/Calendar.css";
+import deleteIcon from "../../assets/icons/Delete.png";
+import Calendar from "../Calendar/Calendar";
 
 function Edit({ cardData }) {
   const defaultTitle = cardData && cardData.title ? cardData.title : "";
@@ -16,11 +18,9 @@ function Edit({ cardData }) {
   const defaultChecklistItems =
     cardData && cardData.checkList ? cardData.checkList : [];
   const defaultSelectedDate =
-    cardData && cardData.dueDate
-      ? moment(cardData.dueDate).format("YYYY-MM-DD")
-      : "";
+    cardData && cardData.dueDate ? cardData.dueDate : "";
 
-  console.log("default checkList is ---------->", cardData);
+  console.log("default checkList is ---------->", defaultSelectedDate);
   const [title, setTitle] = useState(defaultTitle);
   const [priority, setPriority] = useState(defaultPriority);
   const [checklistItems, setChecklistItems] = useState(defaultChecklistItems);
@@ -29,6 +29,7 @@ function Edit({ cardData }) {
   const { fetchAllData } = useData();
   const { duration } = useDuration();
   const { updateCardId } = useEditCard();
+
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -72,13 +73,9 @@ function Edit({ cardData }) {
     updateCardId(null);
   };
 
-  const handleDateChange = (event) => {
-    setSelectedDate(event.target.value);
+  const handleDateChange = (value) => {
+    setSelectedDate(value);
     setShowDatePicker(false);
-  };
-
-  const handleToggleDatePicker = () => {
-    setShowDatePicker(!showDatePicker);
   };
 
   const editCardHandler = async (
@@ -89,16 +86,22 @@ function Edit({ cardData }) {
     dueDate
   ) => {
     try {
-      const isoDate = moment(dueDate, "YYYY-MM-DD").toISOString();
-      console.log("card id is --------->", cardId);
+      console.log(
+        "jhsaghebfbefefef eifefefedfe fefis --------->",
+        cardId,
+        title,
+        priority,
+        checklistItems,
+        dueDate
+      );
       const response = await editCard(
         cardId,
         title,
         priority,
         checklistItems,
-        isoDate
+        dueDate
       );
-      toast.success("Card Created Successfully", {
+      toast.success("Card Updated Successfully", {
         autoClose: 1000,
       });
     } catch (err) {
@@ -109,16 +112,23 @@ function Edit({ cardData }) {
   return (
     <div className={styles.create}>
       <div className={styles.box}>
-        <p className={styles.title}>Title</p>
+        <p className={styles.title}>
+          Title<span className={styles.required}>*</span>
+        </p>
         <input
+          className={styles.titleInput}
           name="title"
           placeholder="Enter Task Title"
           value={title}
           onChange={handleTitleChange}
         />
         <div className={styles.priority}>
-          <div>Select Priority</div>
-          <label>
+          <div>
+            Select Priority<span className={styles.required}>*</span>
+          </div>
+          <label
+            style={{ background: priority === "high" ? "#EEECEC" : "white" }}
+          >
             <input
               type="radio"
               name="priority"
@@ -128,7 +138,11 @@ function Edit({ cardData }) {
             />
             High Priority
           </label>
-          <label>
+          <label
+            style={{
+              background: priority === "moderate" ? "#EEECEC" : "white",
+            }}
+          >
             <input
               type="radio"
               name="priority"
@@ -138,7 +152,11 @@ function Edit({ cardData }) {
             />
             Moderate Priority
           </label>
-          <label>
+          <label
+            style={{
+              background: priority === "low" ? "#EEECEC" : "white",
+            }}
+          >
             <input
               type="radio"
               name="priority"
@@ -149,60 +167,69 @@ function Edit({ cardData }) {
             Low Priority
           </label>
         </div>
-        <div className={styles.checklist}>
-          CheckList({checklistItems.filter((item) => item.checked).length}/
-          {checklistItems.length})
-          {checklistItems.map((item, index) => (
-            <div key={index} className={styles.checklistItem}>
-              <input
-                type="checkbox"
-                id={`item-${index}`}
-                checked={item.isCompleted}
-                onChange={(e) =>
-                  handleChecklistItemChange(
-                    index,
-                    "isCompleted",
-                    e.target.checked
-                  )
-                }
-              />
-              <input
-                type="title"
-                value={item.title}
-                onChange={(e) =>
-                  handleChecklistItemChange(index, "title", e.target.value)
-                }
-              />
-              <button onClick={() => handleDeleteChecklistItem(index)}>
-                Delete
-              </button>
+        <div className={styles.checkList}>
+          <span className={styles.checkListTitle}>CheckList</span>
+          <span className={styles.countDisplay}>
+            ( {checklistItems.filter((item) => item.isCompleted).length}/
+            {checklistItems.length})
+          </span>
+          <span className={styles.required}>*</span>
+          <div className={styles.scrollContainer}>
+            <div className={styles.scroll}>
+              {checklistItems.map((item, index) => (
+                <div key={index} className={styles.checkListItem}>
+                  <input
+                    className={styles.checkBox}
+                    type="checkbox"
+                    id={`item-${index}`}
+                    checked={item.isCompleted}
+                    onChange={(e) =>
+                      handleChecklistItemChange(
+                        index,
+                        "isCompleted",
+                        e.target.checked
+                      )
+                    }
+                  />
+                  <input
+                    className={styles.checkListInput}
+                    type="text"
+                    value={item.title}
+                    placeholder="Add a Task"
+                    onChange={(e) =>
+                      handleChecklistItemChange(index, "title", e.target.value)
+                    }
+                  />
+
+                  <img
+                    className={styles.deleteIcon}
+                    src={deleteIcon}
+                    onClick={() => handleDeleteChecklistItem(index)}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
         <div className={styles.addNew} onClick={handleAddChecklistItem}>
           + Add New
         </div>
-        <div>
-          {showDatePicker ? (
-            <input
-              type="date"
-              id="dueDate"
-              value={selectedDate}
-              onChange={handleDateChange}
-            />
-          ) : (
-            <button onClick={handleToggleDatePicker}>
-              {selectedDate ? selectedDate : "Select Due Date"}
-            </button>
-          )}
-        </div>
-
         <div className={styles.footer}>
-          <div className={styles.cancel} onClick={handleCancel}>
-            Cancel
+          <div className={styles.datePickerContainer}>
+            <Calendar
+              selectedDate={selectedDate}
+              handleDateChange={handleDateChange}
+              onClose={() => setShowDatePicker(false)}
+            />
           </div>
-          <div className={styles.save} onClick={handleSave}>
-            Save
+
+          <div className={styles.subfooter}>
+            <div className={styles.cancel} onClick={handleCancel}>
+              Cancel
+            </div>
+            <div className={styles.save} onClick={handleSave}>
+              Save
+            </div>
           </div>
         </div>
       </div>

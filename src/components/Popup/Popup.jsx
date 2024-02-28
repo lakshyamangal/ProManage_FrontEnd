@@ -33,7 +33,7 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
     updateCardId(cardData);
     hidePopup(false);
     // updateOpen(false, "edit");
-    setShowEdit(true);
+    // setShowEdit(true);
   };
   const divRef = useRef(null);
   // Function to handle clicks outside of the div
