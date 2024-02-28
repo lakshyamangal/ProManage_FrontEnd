@@ -7,6 +7,7 @@ import React, {
 import { useDuration } from "../../Context/DurationContext";
 import { useDeleteCard } from "../../Context/DeleteCardContext";
 import { useClosePopupCard } from "../../Context/closePopup";
+
 import { useData } from "../../Context/dataContext";
 import styles from "./card.module.css";
 import upArrow from "../../assets/icons/up.png";
@@ -17,8 +18,11 @@ import Popup from "../Popup/Popup";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEditCard } from "../../Context/editContext";
 const Card = forwardRef(({ cardData }, ref) => {
   const [collapsed, setCollapsed] = useState(true);
+  const [charLength, setCharLength] = useState(cardData.title.length);
+  const [title, setTitle] = useState(cardData.title);
   const [checkListCount, setCheckListCount] = useState({});
   const [displayDueDate, setDisplayDueDate] = useState("");
   const [haveDueDate, setHaveDueDate] = useState(true);
@@ -26,6 +30,7 @@ const Card = forwardRef(({ cardData }, ref) => {
   const [showPopup, setShowPopup] = useState(false);
   const { fetchAllData } = useData();
   const { updateOpen, isOpen } = useClosePopupCard();
+  const { cardId, updateCardId } = useEditCard();
   // const { isOpen } = useClosePopupCard();
   const { duration } = useDuration();
   const handleStatusChange = async (cardId, status) => {
@@ -53,6 +58,7 @@ const Card = forwardRef(({ cardData }, ref) => {
     }
   };
   const dotHandler = (val) => {
+    // updateCardId(cardData._id);
     console.log("dcdf ", val);
     if (val) {
       setShowPopup(true);
@@ -75,7 +81,11 @@ const Card = forwardRef(({ cardData }, ref) => {
 
   useEffect(() => {
     cardData.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
-
+    console.log("length ", charLength);
+    if (charLength >= 16) {
+      const str = `${cardData.title.slice(0, 16)}...`;
+      setTitle(str);
+    }
     const dueDate = moment(cardData.dueDate);
     const currentDateMoment = moment();
     const isAfter = currentDateMoment.isAfter(dueDate);
@@ -100,9 +110,9 @@ const Card = forwardRef(({ cardData }, ref) => {
           {`${cardData.priority} priority`}
         </div>
         {/* <img onClick={dotHandler} src={dots} /> */}
-        <div onClick={() => updateOpen(true, "ffvf")}>
+        <div onClick={() => dotHandler(true)}>
           <b className={styles.dots}>...</b>
-          {isOpen && (
+          {showPopup && (
             <Popup
               cardData={cardData}
               hidePopup={dotHandler}
@@ -111,7 +121,13 @@ const Card = forwardRef(({ cardData }, ref) => {
           )}
         </div>
       </div>
-      <div className={styles.cardTitle}>{cardData.title}</div>
+      <div
+        className={styles.cardTitle}
+        onMouseEnter={() => handleShowTooltip(true)}
+        onMouseLeave={() => handleShowTooltip(false)}
+      >
+        {title}
+      </div>
       <div className={styles.checkListContainer}>
         <div className={styles.checkListCount}>
           <div className={styles.checkListCountTitle}>

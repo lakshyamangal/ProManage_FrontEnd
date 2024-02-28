@@ -17,19 +17,20 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
     // debugger;
     updateDelCardId(cardData);
     console.log("calling ");
-
+    hidePopup(false);
     //to toggle the isOpen state when an action occurs within the Popup component, but this action also triggers the onClick event of the parent div. To prevent this from happening, you can stop the propagation of the click event within the Popup component.
     event.stopPropagation();
 
     updateOpen(false, "del");
-    // setShowDelete(true);
+    setShowDelete(true);
   };
 
   const openEditModal = (event) => {
     event.stopPropagation();
     updateCardId(cardData);
-    updateOpen(false, "edit");
-    // setShowEdit(true);
+    hidePopup(false);
+    // updateOpen(false, "edit");
+    setShowEdit(true);
   };
   const divRef = useRef(null);
   // Function to handle clicks outside of the div
@@ -39,7 +40,7 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
       divRef.current &&
       !divRef.current.contains(event.target)
     ) {
-      updateOpen(false, "click");
+      hidePopup(false);
     }
     count = count + 1;
   };
@@ -77,6 +78,7 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
             `http://localhost:5173/dashboard/card/${cardData._id}`
           );
           updateOpen(false);
+          hidePopup(false);
         }}
       >
         Share

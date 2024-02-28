@@ -29,6 +29,11 @@
 .input input:focus {
   outline: none;
 }
+.error {
+  font-size: 1rem;
+  color: #b22b27;
+  padding-bottom: 20px;
+}
 .rightImg {
   margin-left: auto;
 }
