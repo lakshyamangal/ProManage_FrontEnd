@@ -91,20 +91,15 @@ function Edit({ cardData }) {
     dueDate
   ) => {
     try {
-      console.log(
-        "jhsaghebfbefefef eifefefedfe fefis --------->",
-        cardId,
-        title,
-        priority,
-        checklistItems,
-        dueDate
-      );
+      const finalDate = dueDate
+        ? moment(dueDate).add(1, "day").subtract(2, "minutes").toISOString()
+        : dueDate;
       const response = await editCard(
         cardId,
         title,
         priority,
         checklistItems,
-        dueDate
+        finalDate
       );
       toast.success("Card Updated Successfully", {
         autoClose: 1000,

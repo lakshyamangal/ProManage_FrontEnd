@@ -61,6 +61,7 @@ function Create() {
           throw new Error("Title of checklist should not be empty!");
         }
       });
+
       await createCardHandler(title, priority, checklistItems, selectedDate);
       await fetchAllData(duration);
     } catch (error) {
@@ -81,12 +82,15 @@ function Create() {
     dueDate
   ) => {
     try {
-      console.log("dueDate ", dueDate);
+      const finalDate = dueDate
+        ? moment(dueDate).add(1, "day").subtract(2, "minutes").toISOString()
+        : dueDate;
+      console.log("dueDate ", finalDate);
       const response = await createCard(
         title,
         priority,
         checklistItems,
-        dueDate
+        finalDate
       );
       toast.success("Card Created Successfully", {
         autoClose: 1000,
