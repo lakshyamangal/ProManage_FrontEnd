@@ -30,8 +30,8 @@ function Login() {
       const response = await loginUser({ ...data });
 
       if (response) {
-        localStorage.setItem("token", response.token);
         localStorage.setItem("userName", response.name);
+        localStorage.setItem("token", response.token);
         toast.success("Logged in Successfully", {
           onClose: () => navigate("/Dashboard"),
         });

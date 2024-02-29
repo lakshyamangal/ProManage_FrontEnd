@@ -11,13 +11,13 @@ import lock from "../../assets/icons/lock.png";
 import eye from "../../assets/icons/eye.png";
 import hide from "../../assets/icons/hide.png";
 
-const initialValues = {
-  name: localStorage.getItem("userName"),
-  oldPassword: "",
-  newPassword: "",
-};
-
 function SettingsPage() {
+  const initialValues = {
+    name: localStorage.getItem("userName"),
+    oldPassword: "",
+    newPassword: "",
+  };
+
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -31,14 +31,14 @@ function SettingsPage() {
 
   const userUpdateHandler = async ({ ...data }) => {
     try {
-      const response = await updateUser(formData);
+      const response = await updateUser(data);
       console.log(response);
       localStorage.removeItem("userName");
       localStorage.removeItem("token");
       toast.success("User Details Updated Successfully", {
         autoClose: 500,
         onClose: () => {
-          navigate("/login");
+          navigate("/");
         },
       });
     } catch (err) {
@@ -60,6 +60,7 @@ function SettingsPage() {
     });
   console.log(errors);
 
+  console.log(initialValues);
   return (
     <div className={styles.settingsPage}>
       <h2 className={styles.title}>Settings</h2>
@@ -86,7 +87,7 @@ function SettingsPage() {
             placeholder="Old Password"
             name="oldPassword"
             autoComplete="off"
-            value={values.password}
+            value={values.oldPassword}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -107,7 +108,7 @@ function SettingsPage() {
             placeholder="New Password"
             name="newPassword"
             autoComplete="off"
-            value={values.password}
+            value={values.newPassword}
             onChange={handleChange}
             onBlur={handleBlur}
           />

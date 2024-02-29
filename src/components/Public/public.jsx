@@ -42,17 +42,7 @@ function Public() {
   };
   useEffect(() => {
     fetchCardDetails(cardId);
-    cardData?.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
-
-    const dueDate = moment(cardData?.dueDate);
-    const currentDateMoment = moment();
-    const isAfter = currentDateMoment.isAfter(dueDate);
-    const color =
-      cardData?.status == "done" ? "#63c05b" : isAfter ? "#cf3636" : "#DBDBDB";
-    setBackgroundColor(color);
-    setDisplayDueDate(dueDate.format("MMM DD"));
-
-    fetchCheckListCount(cardData?._id);
+    fetchCheckListCount(cardId);
   }, []);
   const fetchCardDetails = async (cardId) => {
     try {
@@ -60,6 +50,19 @@ function Public() {
       console.log("isAfter ", response);
       setCardData(response);
       console.log(response);
+      response?.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
+      console.log("due date is ------------>", response?.dueDate);
+      const dueDate = moment(response?.dueDate);
+      const currentDateMoment = moment();
+      const isAfter = currentDateMoment.isAfter(dueDate);
+      const color =
+        cardData?.status == "done"
+          ? "#63c05b"
+          : isAfter
+          ? "#cf3636"
+          : "#DBDBDB";
+      setBackgroundColor(color);
+      setDisplayDueDate(dueDate.format("MMM DD"));
     } catch (error) {
       console.log(error);
       toast.error(error.message, { autoClose: 1000 });
