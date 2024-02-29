@@ -22,7 +22,6 @@ import { useEditCard } from "../../Context/editContext";
 const Card = forwardRef(({ cardData }, ref) => {
   const [collapsed, setCollapsed] = useState(true);
   const [charLength, setCharLength] = useState(cardData.title.length);
-  // const [title, setTitle] = useState(cardData.title);
   const [title, setTitle] = useState(cardData.title);
   const [checkListCount, setCheckListCount] = useState({});
   const [displayDueDate, setDisplayDueDate] = useState("");
@@ -32,7 +31,6 @@ const Card = forwardRef(({ cardData }, ref) => {
   const { fetchAllData } = useData();
   const { updateOpen, isOpen } = useClosePopupCard();
   const { cardId, updateCardId } = useEditCard();
-  // const { isOpen } = useClosePopupCard();
   const { duration } = useDuration();
   const handleStatusChange = async (cardId, status) => {
     try {
@@ -55,7 +53,7 @@ const Card = forwardRef(({ cardData }, ref) => {
       setCollapsed(true);
     },
   }));
-  // console.log("element to be invoked", crudElement);
+
   const fetchCheckListCount = async (cardId) => {
     try {
       const response = await getCheckListCount(cardId);
@@ -66,7 +64,6 @@ const Card = forwardRef(({ cardData }, ref) => {
     }
   };
   const dotHandler = (val) => {
-    // updateCardId(cardData._id);
     console.log("dcdf ", val);
     if (val) {
       setShowPopup(true);
@@ -90,8 +87,8 @@ const Card = forwardRef(({ cardData }, ref) => {
   useEffect(() => {
     cardData.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
     console.log("length ", charLength);
-    if (charLength >= 16) {
-      const str = `${cardData.title.slice(0, 16)}...`;
+    if (charLength >= 35) {
+      const str = `${cardData.title.slice(0, 35)}...`;
       setTitle(str);
     }
     const dueDate = moment(cardData.dueDate);
@@ -117,7 +114,6 @@ const Card = forwardRef(({ cardData }, ref) => {
           ></div>
           {`${cardData.priority} priority`}
         </div>
-        {/* <img onClick={dotHandler} src={dots} /> */}
         <div onClick={() => dotHandler(true)}>
           <b className={styles.dots}>...</b>
           {showPopup && (

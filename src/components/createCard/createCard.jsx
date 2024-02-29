@@ -9,7 +9,7 @@ import "react-calendar/dist/Calendar.css";
 import { useData } from "../../Context/dataContext";
 import { useDuration } from "../../Context/DurationContext";
 import deleteIcon from "../../assets/icons/Delete.png";
-import Calendar from "../Calendar/Calendar";
+import Calender from "../Calendar/Calendar";
 function Create() {
   const [title, setTitle] = useState("");
   const [priority, setPriority] = useState("");
@@ -206,7 +206,7 @@ function Create() {
         </div>
         <div className={styles.footer}>
           <div className={styles.datePickerContainer}>
-            <Calendar
+            <Calender
               selectedDate={selectedDate}
               handleDateChange={handleDateChange}
               onClose={() => setShowDatePicker(false)}

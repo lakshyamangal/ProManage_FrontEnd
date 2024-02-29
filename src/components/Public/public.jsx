@@ -16,6 +16,7 @@ function Public() {
   const [checkListCount, setCheckListCount] = useState({});
   const [displayDueDate, setDisplayDueDate] = useState("");
   const [backgroundColor, setBackgroundColor] = useState("#cf3636");
+  const [titleShow, setTitleShow] = useState("");
 
   const fetchCheckListCount = async (cardId) => {
     try {
@@ -40,16 +41,22 @@ function Public() {
         return "gray";
     }
   };
+
   useEffect(() => {
     fetchCardDetails(cardId);
     fetchCheckListCount(cardId);
   }, []);
+
   const fetchCardDetails = async (cardId) => {
     try {
       const response = await getSingleCard(cardId);
       console.log("isAfter ", response);
       setCardData(response);
       console.log(response);
+      if (response?.title.length >= 35) {
+        const str = `${response.title.slice(0, 35)}...`;
+        setTitleShow(str);
+      }
       response?.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
       console.log("due date is ------------>", response?.dueDate);
       const dueDate = moment(response?.dueDate);
@@ -68,6 +75,7 @@ function Public() {
       toast.error(error.message, { autoClose: 1000 });
     }
   };
+
   return (
     <div className={styles.cardContainer}>
       <div className={styles.logo}>
@@ -87,7 +95,9 @@ function Public() {
             {`${cardData?.priority} priority`}
           </div>
         </div>
-        <div className={styles.cardTitle}>{cardData?.title}</div>
+        <div className={styles.cardTitle} title={cardData?.title}>
+          {titleShow}
+        </div>
         <div className={styles.checkListContainer}>
           <div className={styles.checkListCount}>
             <div className={styles.checkListCountTitle}>

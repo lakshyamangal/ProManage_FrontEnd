@@ -72,7 +72,7 @@ function Register() {
     <div className={styles.container}>
       <h1 className={styles.h1}>Register</h1>
       <div className={styles.input}>
-        <img className={styles.leftImg} src={email} />
+        <img className={styles.leftImg} src={user} />
         <input
           type="name"
           autoComplete="off"
