@@ -37,10 +37,11 @@ const Card = forwardRef(({ cardData }, ref) => {
       await statusChange(cardId, status);
       toast.success("Status of Task Changed  Successfully", {
         autoClose: 1000,
+        pauseOnHover: false,
       });
       await fetchAllData(duration);
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { autoClose: 1000, pauseOnHover: false });
     }
   };
 

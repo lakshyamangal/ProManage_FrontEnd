@@ -150,7 +150,7 @@ function Register() {
       <button onClick={redirectToLoginPage} className={styles.button2}>
         Log in
       </button>
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={1000} pauseOnHover={false} />
     </div>
   );
 }

@@ -90,10 +90,14 @@ function Create() {
       );
       toast.success("Card Created Successfully", {
         autoClose: 1000,
+        pauseOnHover: false,
       });
       toggleShowCreate(false);
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, {
+        autoClose: 1000,
+        pauseOnHover: false,
+      });
     }
   };
   return (

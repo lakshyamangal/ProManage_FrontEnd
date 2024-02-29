@@ -47,15 +47,18 @@ const Popup = ({ cardData, hidePopup, showPopup }) => {
     }
     count = count + 1;
   };
-
   const copyToClipboard = async (url) => {
     try {
       await navigator.clipboard.writeText(url);
       toast.success("Share Link Copied Successfully", {
         autoClose: 1000,
+        pauseOnHover: false,
       });
     } catch (error) {
-      toast.error(err.message);
+      toast.error(err.message, {
+        autoClose: 1000,
+        pauseOnHover: false,
+      });
     }
   };
 

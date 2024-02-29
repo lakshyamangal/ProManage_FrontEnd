@@ -18,6 +18,7 @@ function Delete({ cardData }) {
       const response = await deleteCard(cardData._id);
       toast.success(response, {
         autoClose: 1000,
+        pauseOnHover: false,
       });
       // closeDeleteModal();
       updateDelCardId(null);
@@ -27,6 +28,7 @@ function Delete({ cardData }) {
       updateDelCardId(null);
       toast.error(error.message, {
         autoClose: 1000,
+        pauseOnHover: false,
       });
     }
   };

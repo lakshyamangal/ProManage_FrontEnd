@@ -37,6 +37,7 @@ function SettingsPage() {
       localStorage.removeItem("token");
       toast.success("User Details Updated Successfully", {
         autoClose: 500,
+        pauseOnHover: false,
         onClose: () => {
           navigate("/");
         },
@@ -44,6 +45,7 @@ function SettingsPage() {
     } catch (err) {
       toast.error(err.message, {
         autoClose: 1500,
+        pauseOnHover: false,
       });
     }
   };

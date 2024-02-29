@@ -107,7 +107,7 @@ function Login() {
       <button onClick={() => navigate("/register")} className={styles.button2}>
         Register
       </button>
-      <ToastContainer autoClose={1000} />
+      <ToastContainer autoClose={1000} pauseOnHover={false} />
     </div>
   );
 }

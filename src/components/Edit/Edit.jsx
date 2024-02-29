@@ -108,9 +108,10 @@ function Edit({ cardData }) {
       );
       toast.success("Card Updated Successfully", {
         autoClose: 1000,
+        pauseOnHover: false,
       });
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { autoClose: 1000, pauseOnHover: false });
     }
   };
 
