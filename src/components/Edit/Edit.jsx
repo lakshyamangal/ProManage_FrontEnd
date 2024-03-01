@@ -9,7 +9,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-calendar/dist/Calendar.css";
 import deleteIcon from "../../assets/icons/Delete.png";
-import Calendar from "../Calendar/Calendar";
 
 function Edit({ cardData }) {
   const defaultTitle = cardData && cardData.title ? cardData.title : "";
@@ -29,6 +28,14 @@ function Edit({ cardData }) {
   const { fetchAllData } = useData();
   const { duration } = useDuration();
   const { updateCardId } = useEditCard();
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+    setShowDatePicker(false);
+  };
+
+  const handleToggleDatePicker = () => {
+    setShowDatePicker(!showDatePicker);
+  };
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
@@ -84,10 +91,10 @@ function Edit({ cardData }) {
     }
   };
 
-  const handleDateChange = (value) => {
-    setSelectedDate(value);
-    setShowDatePicker(false);
-  };
+  // const handleDateChange = (value) => {
+  //   setSelectedDate(value);
+  //   setShowDatePicker(false);
+  // };
 
   const editCardHandler = async (
     cardId,
@@ -223,11 +230,28 @@ function Edit({ cardData }) {
         </div>
         <div className={styles.footer}>
           <div className={styles.datePickerContainer}>
-            <Calendar
+            {/* <Calendar
               selectedDate={selectedDate}
               handleDateChange={handleDateChange}
               onClose={() => setShowDatePicker(false)}
-            />
+            /> */}
+            <div>
+              {showDatePicker ? (
+                <div className={styles.calenderInput}>
+                  {" "}
+                  <input
+                    type="date"
+                    id="dueDate"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                  />
+                </div>
+              ) : (
+                <button onClick={handleToggleDatePicker}>
+                  {selectedDate ? selectedDate : "Select Due Date"}
+                </button>
+              )}
+            </div>
           </div>
 
           <div className={styles.subfooter}>

@@ -9,7 +9,6 @@ import "react-calendar/dist/Calendar.css";
 import { useData } from "../../Context/dataContext";
 import { useDuration } from "../../Context/DurationContext";
 import deleteIcon from "../../assets/icons/Delete.png";
-import Calender from "../Calendar/Calendar";
 function Create() {
   const [title, setTitle] = useState("");
   const [priority, setPriority] = useState("");
@@ -22,6 +21,19 @@ function Create() {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+    setShowDatePicker(false);
+  };
+
+  const handleToggleDatePicker = () => {
+    setShowDatePicker(!showDatePicker);
+  };
+  // const handleDateChange = (value) => {
+  //   setSelectedDate(value);
+  //   console.log("called", value);
+  //   setShowDatePicker(false);
+  // };
 
   const handlePriorityChange = (e) => {
     console.log(e.target.value);
@@ -67,12 +79,6 @@ function Create() {
     } catch (error) {
       toast.error(error.message);
     }
-  };
-
-  const handleDateChange = (value) => {
-    setSelectedDate(value);
-    console.log("called", value);
-    setShowDatePicker(false);
   };
 
   const createCardHandler = async (
@@ -214,11 +220,28 @@ function Create() {
         </div>
         <div className={styles.footer}>
           <div className={styles.datePickerContainer}>
-            <Calender
+            {/* <Calender
               selectedDate={selectedDate}
               handleDateChange={handleDateChange}
               onClose={() => setShowDatePicker(false)}
-            />
+            /> */}
+            <div>
+              {showDatePicker ? (
+                <div className={styles.calenderInput}>
+                  {" "}
+                  <input
+                    type="date"
+                    id="dueDate"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                  />
+                </div>
+              ) : (
+                <button onClick={handleToggleDatePicker}>
+                  {selectedDate ? selectedDate : "Select Due Date"}
+                </button>
+              )}
+            </div>
           </div>
 
           <div className={styles.subfooter}>

@@ -158,6 +158,12 @@
   position: relative;
 }
 
+.calenderInput {
+  position: absolute;
+  top: 50;
+  left: 50;
+}
+
 .dueDateLabel {
   position: absolute;
   bottom: calc(100% + 10px); /* Adjust the value as needed */
