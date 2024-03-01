@@ -61,8 +61,14 @@ function Edit({ cardData }) {
 
   const handleSave = async (event) => {
     try {
-      console.log("------------------>", checklistItems);
       event.stopPropagation();
+      if (title.trim() == "") throw new Error("Title is required!");
+      if (priority == "") throw new Error("priority is a required field");
+      checklistItems.map((item) => {
+        if (item.title.trim() == "") {
+          throw new Error("Title of checklist should not be empty!");
+        }
+      });
       await editCardHandler(
         cardData._id,
         title,

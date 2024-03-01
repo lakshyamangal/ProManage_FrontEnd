@@ -6,7 +6,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import dayjs from "dayjs";
-import moment from "moment";
 const theme = createTheme({
   components: {
     // Name of the component
@@ -18,7 +17,7 @@ const theme = createTheme({
         },
         input: {
           "&::placeholder": {
-            color: "red", // Change placeholder color to red
+            color: "red",
           },
         },
       },
@@ -33,8 +32,7 @@ const theme = createTheme({
     MuiInputLabel: {
       styleOverrides: {
         root: {
-          // Your styles for error state here
-          color: "#707070 !important", // Example: Changing border color to red
+          color: "#707070 !important",
         },
       },
     },
@@ -42,7 +40,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: "#707070 !important", // Example: Changing border color to red
+            borderColor: "#707070 !important",
           },
         },
       },
@@ -51,9 +49,18 @@ const theme = createTheme({
 });
 
 export default function Calendar({ selectedDate, handleDateChange }) {
+  const handleClear = () => {
+    console.log("clear");
+  };
   const handleChange = (date) => {
     console.log("date ", date);
-    handleDateChange(date); // Pass the selected date to the handleDateChange method
+    handleDateChange(date);
+  };
+  const handleCancel = () => {
+    console.log("called cancel");
+  };
+  const handleAccept = () => {
+    console.log("jfhsfhjfh");
   };
   return (
     <ThemeProvider theme={theme}>
@@ -64,6 +71,9 @@ export default function Calendar({ selectedDate, handleDateChange }) {
             defaultValue={dayjs(selectedDate)} //only use dayjs for default value for this calander libarary
             format={"DD/MM/YYYY"}
             onChange={handleChange}
+            cancelText="Custom Cancel"
+            onDismiss={handleClear}
+            onAccept={handleAccept}
           />
         </DemoContainer>
       </LocalizationProvider>
