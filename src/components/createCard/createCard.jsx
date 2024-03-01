@@ -237,7 +237,10 @@ function Create() {
                   />
                 </div>
               ) : (
-                <button onClick={handleToggleDatePicker}>
+                <button
+                  className={styles.dateSelector}
+                  onClick={handleToggleDatePicker}
+                >
                   {selectedDate ? selectedDate : "Select Due Date"}
                 </button>
               )}

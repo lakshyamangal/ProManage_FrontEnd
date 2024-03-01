@@ -164,6 +164,10 @@
   left: 50;
 }
 
+.dateSelector {
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+}
 .dueDateLabel {
   position: absolute;
   bottom: calc(100% + 10px); /* Adjust the value as needed */

@@ -156,6 +156,18 @@
 
 .datePickerContainer {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calenderInput {
+  position: absolute;
+  top: 50;
+  left: 50;
+}
+.dateSelector {
+  padding: 0.8rem;
+  border-radius: 0.4rem;
 }
 
 .dueDateLabel {

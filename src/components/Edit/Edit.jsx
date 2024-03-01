@@ -230,11 +230,6 @@ function Edit({ cardData }) {
         </div>
         <div className={styles.footer}>
           <div className={styles.datePickerContainer}>
-            {/* <Calendar
-              selectedDate={selectedDate}
-              handleDateChange={handleDateChange}
-              onClose={() => setShowDatePicker(false)}
-            /> */}
             <div>
               {showDatePicker ? (
                 <div className={styles.calenderInput}>
@@ -247,7 +242,10 @@ function Edit({ cardData }) {
                   />
                 </div>
               ) : (
-                <button onClick={handleToggleDatePicker}>
+                <button
+                  className={styles.dateSelector}
+                  onClick={handleToggleDatePicker}
+                >
                   {selectedDate ? selectedDate : "Select Due Date"}
                 </button>
               )}
