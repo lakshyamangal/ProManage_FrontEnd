@@ -29,11 +29,6 @@ function Create() {
   const handleToggleDatePicker = () => {
     setShowDatePicker(!showDatePicker);
   };
-  // const handleDateChange = (value) => {
-  //   setSelectedDate(value);
-  //   console.log("called", value);
-  //   setShowDatePicker(false);
-  // };
 
   const handlePriorityChange = (e) => {
     console.log(e.target.value);
@@ -230,6 +225,7 @@ function Create() {
                 <div className={styles.calenderInput}>
                   {" "}
                   <input
+                    className={styles.dateInput}
                     type="date"
                     id="dueDate"
                     value={selectedDate}

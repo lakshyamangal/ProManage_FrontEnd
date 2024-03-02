@@ -16,10 +16,11 @@ function Edit({ cardData }) {
     cardData && cardData.priority ? cardData.priority : "";
   const defaultChecklistItems =
     cardData && cardData.checkList ? cardData.checkList : [];
-  const defaultSelectedDate =
-    cardData && cardData.dueDate ? cardData.dueDate : "";
+  const defaultSelectedDatePrev =
+    cardData && cardData.dueDate ? moment(cardData.dueDate) : "";
+  const defaultSelectedDate = defaultSelectedDatePrev.format("DD/MM/YYYY");
 
-  console.log("default checkList is ---------->", defaultSelectedDate);
+  console.log("this is my latest console log", cardData.dueDate);
   const [title, setTitle] = useState(defaultTitle);
   const [priority, setPriority] = useState(defaultPriority);
   const [checklistItems, setChecklistItems] = useState(defaultChecklistItems);
@@ -235,6 +236,7 @@ function Edit({ cardData }) {
                 <div className={styles.calenderInput}>
                   {" "}
                   <input
+                    className={styles.dateInput}
                     type="date"
                     id="dueDate"
                     value={selectedDate}
