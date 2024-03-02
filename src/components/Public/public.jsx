@@ -53,8 +53,8 @@ function Public() {
       console.log("isAfter ", response);
       setCardData(response);
       console.log(response);
-      if (response?.title.length >= 35) {
-        const str = `${response.title.slice(0, 35)}...`;
+      if (response?.title.length >= 25) {
+        const str = `${response.title.slice(0, 25)}...`;
         setTitleShow(str);
       }
       response?.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);

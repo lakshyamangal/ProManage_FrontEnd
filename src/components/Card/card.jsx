@@ -88,8 +88,8 @@ const Card = forwardRef(({ cardData }, ref) => {
   useEffect(() => {
     cardData.dueDate == null ? setHaveDueDate(false) : setHaveDueDate(true);
     console.log("length ", charLength);
-    if (charLength >= 35) {
-      const str = `${cardData.title.slice(0, 35)}...`;
+    if (charLength >= 25) {
+      const str = `${cardData.title.slice(0, 25)}...`;
       setTitle(str);
     }
     const dueDate = moment(cardData.dueDate);
