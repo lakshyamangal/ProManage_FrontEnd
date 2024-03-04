@@ -16,9 +16,8 @@ function Edit({ cardData }) {
     cardData && cardData.priority ? cardData.priority : "";
   const defaultChecklistItems =
     cardData && cardData.checkList ? cardData.checkList : [];
-  const defaultSelectedDatePrev =
-    cardData && cardData.dueDate ? moment(cardData.dueDate) : "";
-  const defaultSelectedDate = defaultSelectedDatePrev.format("DD/MM/YYYY");
+  const defaultSelectedDate =
+    cardData && cardData.dueDate ? cardData.dueDate : "";
 
   console.log("this is my latest console log", cardData.dueDate);
   const [title, setTitle] = useState(defaultTitle);
