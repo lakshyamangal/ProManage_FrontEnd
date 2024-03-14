@@ -18,6 +18,7 @@
   z-index: 9999;
   background: white;
   min-height: 50vh;
+  max-height: 50vh;
   min-width: 40vw;
   /* height: 60vh;
   width: 40vw; */
@@ -77,7 +78,7 @@
   accent-color: #17a2b8;
 }
 .checkList {
-  max-height: 40%;
+  height: 40%;
 }
 .checkListTitle {
   font-weight: 400;
@@ -88,8 +89,9 @@
 
 .scrollContainer {
   margin-top: 1rem;
-  max-height: 80%;
+  max-height: 20vh;
   overflow: auto;
+  /* background-color: red; */
   width: 100%;
 }
 .scroll {
