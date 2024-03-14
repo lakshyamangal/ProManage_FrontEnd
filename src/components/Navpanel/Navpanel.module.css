@@ -1,7 +1,7 @@
 .navBar {
   width: 15vw;
   background-color: #fff;
-  height: 99vh;
+  height: 100vh;
   border-right-style: inset;
   border-width: 0.1cap;
   border-color: #eef2f5;
@@ -40,19 +40,14 @@
   margin-left: 0.5rem;
 }
 .logOut {
-  margin-left: 1.5em;
   display: flex;
-  width: 100%;
   align-items: center;
-  /* padding: 3rem; */
+  padding: 3rem;
+  margin-top: auto;
   color: #cf3636;
-  margin-bottom: 2em;
 }
 
 .logOut:hover {
   cursor: pointer;
   font-size: 1.05rem;
-}
-.fix {
-  justify-content: space-between;
 }
