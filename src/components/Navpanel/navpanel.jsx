@@ -13,22 +13,27 @@ function Navpanel({ changeBoard }) {
     setLogOut(status);
   };
   return (
-    <div className={styles.navBar}>
-      <div className={styles.logoMain}>
-        <img src={ProMangage} alt="logo" />
-        <div className={styles.titleMain}>Pro Manage</div>
+    <div className={` ${styles.navBar} ${styles.fix} `}>
+      <div>
+        <div className={styles.logoMain}>
+          <img src={ProMangage} alt="logo" />
+          <div className={styles.titleMain}>Pro Manage</div>
+        </div>
+        <div className={styles.logo} onClick={() => changeBoard("Board")}>
+          <img src={board} alt="logo" />
+          <div className={styles.title}>Board</div>
+        </div>
+        <div className={styles.logo} onClick={() => changeBoard("Analytics")}>
+          <img src={analytics} alt="logo" />
+          <div className={styles.title}>Analytics</div>
+        </div>
+        <div className={styles.logo} onClick={() => changeBoard("Settings")}>
+          <img src={settings} alt="logo" />
+          <div className={styles.title}>Settings</div>
+        </div>
       </div>
-      <div className={styles.logo} onClick={() => changeBoard("Board")}>
-        <img src={board} alt="logo" />
-        <div className={styles.title}>Board</div>
-      </div>
-      <div className={styles.logo} onClick={() => changeBoard("Analytics")}>
-        <img src={analytics} alt="logo" />
-        <div className={styles.title}>Analytics</div>
-      </div>
-      <div className={styles.logo} onClick={() => changeBoard("Settings")}>
-        <img src={settings} alt="logo" />
-        <div className={styles.title}>Settings</div>
+      <div className={styles.logo}>
+        {logOut && <LogOut changelogOut={changelogOut} />}
       </div>
       <div
         className={styles.logOut}
