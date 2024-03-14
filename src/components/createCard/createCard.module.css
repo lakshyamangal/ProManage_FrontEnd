@@ -89,7 +89,7 @@
 
 .scrollContainer {
   margin-top: 1rem;
-  max-height: 20vh;
+  max-height: 15vh;
   overflow: auto;
   /* background-color: red; */
   width: 100%;
