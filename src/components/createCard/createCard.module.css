@@ -1,9 +1,13 @@
 .create {
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw;
+  height: 100vh; */
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 999;
   background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,11 +15,14 @@
   font-weight: 500;
 }
 .box {
+  z-index: 9999;
   background: white;
-  height: 60vh;
-  width: 40vw;
+  min-height: 50vh;
+  min-width: 40vw;
+  /* height: 60vh;
+  width: 40vw; */
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 2em;
   display: flex;
   flex-direction: column;
 }

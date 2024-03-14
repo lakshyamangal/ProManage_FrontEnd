@@ -118,6 +118,7 @@ function Edit({ cardData }) {
         autoClose: 1000,
         pauseOnHover: false,
       });
+      return;
     } catch (err) {
       toast.error(err.message, { autoClose: 1000, pauseOnHover: false });
     }
